@@ -3,6 +3,7 @@
 Annual 30 m core-habitat maps for seven Ontario woodland caribou ranges (Berens, Brightsand, Churchill, Kesagami, Nipigon, Pagwachuan, Sydney), following Mackey et al. (2024), *Land* 13, 6.
 
 - **Story page:** https://rsl-slu.github.io/caribou/
+- **Technical page** (reproduction maps and every input layer): https://rsl-slu.github.io/caribou/technical.html
 - **Notebook (current, v4):** [`notebooks/ontario_caribou_core_habitat_2015_2025_v4.ipynb`](notebooks/ontario_caribou_core_habitat_2015_2025_v4.ipynb)
 - **ForestTRACE web map:** https://foresttrace.vercel.app
 

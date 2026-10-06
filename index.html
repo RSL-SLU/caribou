@@ -855,42 +855,76 @@ footer p { max-width: 100ch; }
         <p>The maps follow the method of Mackey et&nbsp;al. (2024). We first rebuilt their 2020 result from the same data. Only then did we add ARI and NBAC; the checks that they agree with the study's datasets, and that their records are real, are in the <a href="#data">Data</a> tab.</p>
       </div>
 
-      <figure class="plate" aria-label="Workflow diagram" style="margin-top:24px">
-        <div class="plate-head">
-          <span class="plate-title">Processing chain</span>
-          <span class="plate-meta">each dataset feeds the step above it · names under <a href="#datasets">Datasets</a></span>
-        </div>
-        <div class="flow">
-          <div class="stage">
-            <div class="stage-box"><span class="n">STEP 1</span><b>Align</b><span>One 30 m grid in EPSG:3978 for every layer</span></div>
-            <ul class="inputs"><li>Ranges<i>Land Information Ontario</i></li><li>FMU<i>the managed forest</i></li></ul>
-          </div>
-          <div class="stage">
-            <div class="stage-box"><span class="n">STEP 2</span><b>Potential habitat</b><span>Conifer forest + treed wetland inside the range</span></div>
-            <ul class="inputs"><li>VLCE2<i>NRCan · 2019 · 30 m</i></li></ul>
-          </div>
-          <div class="stage">
-            <div class="stage-box"><span class="n">STEP 3</span><b>Disturbance</b><span>Logging, roads and human footprint with a 500 m zone, plus wildfire</span></div>
-            <ul class="inputs">
-              <li>FRI<i>logging, planting, corridors</i></li>
-              <li>NTEMS harvest<i>NRCan · 1985–2020 · 30 m</i></li>
-              <li>MNRF roads · NRN<i>by year built</i></li>
-              <li>OLCC<i>classes 18, 25, 27, 28</i></li>
-              <li>NFDB<i>fire perimeters</i></li>
-              <li class="added">ARI<i>logging after 2020</i></li>
-              <li class="added">NBAC<i>fire to 2025</i></li>
-            </ul>
-          </div>
-          <div class="stage">
-            <div class="stage-box"><span class="n">STEP 4</span><b>Undisturbed habitat</b><span>Step 2 minus step 3</span></div>
-          </div>
-          <div class="stage core">
-            <div class="stage-box"><span class="n">STEP 5</span><b>Core habitat</b><span>MSPA: strip a 30 m edge, join patches, size them</span></div>
-            <ul class="inputs"><li>Patch-size classes<i>100 · 500 · 1,000 · 10,000 ha</i></li></ul>
-          </div>
-        </div>
-        <figcaption class="plate-foot"><span class="key"><span class="sw" style="background:#a0662a"></span>Added to reach 2025</span><span class="note">Steps 3 to 5 run once for every year from 2015 to 2025.</span></figcaption>
-      </figure>
+
+      <!-- method diagram: overview and data flow (built from scratchpad method_map.html) -->
+<div id="mm">
+  <div class="mm-top"><p class="mm-lede" id="mm-lede">Each circle is a kind of data, and each rule is applied on the way to the yearly map. Point at any circle to follow its path.</p>
+  <div class="views" role="tablist" aria-label="View">
+    <button type="button" role="tab" id="mm-v-over" aria-selected="true">Overview</button>
+    <button type="button" role="tab" id="mm-v-flow" aria-selected="false">Data flow</button>
+  </div></div>
+
+  <div class="stage">
+    <div class="diagram" id="mm-d-flow">
+      <svg id="mm-flow" viewBox="0 0 1300 920" role="img" aria-label="Data flow: datasets, the layers they build, the rules and operations (buffer, union, intersect, subtract, core patches, area shares) and the results.">
+        <defs>
+          <symbol id="mm-f-tree" viewBox="0 0 32 32"><path d="M16 3 L8 14 H12 L6 22 H26 L20 14 H24 Z M16 22 V29"/></symbol>
+          <symbol id="mm-f-axe" viewBox="0 0 32 32"><path d="M8 28 L22 8"/><path d="M18 5 C23 4 28 8 27 13 L22 14 L18 10 Z"/></symbol>
+          <symbol id="mm-f-road" viewBox="0 0 32 32"><path d="M11 3 L5 29 M21 3 L27 29"/><path d="M16 5 V9 M16 13 V17 M16 21 V25"/></symbol>
+          <symbol id="mm-f-built" viewBox="0 0 32 32"><path d="M4 28 V14 L11 18 V14 L18 18 V8 H24 V28 Z M4 28 H28"/><path d="M21 8 V4"/></symbol>
+          <symbol id="mm-f-fire" viewBox="0 0 32 32"><path d="M16 29 C9 29 6 24 7 19 C8 14 12 13 12 8 C16 10 18 13 17 17 C19 16 20 14 20 12 C24 15 26 19 25 22 C24 26 21 29 16 29 Z"/></symbol>
+          <symbol id="mm-f-sat" viewBox="0 0 32 32"><path d="M13 13 L19 19 M12 16 L16 12 L20 16 L16 20 Z"/><path d="M4 11 L9 6 L13 10 L8 15 Z M19 26 L24 21 L28 25 L23 30 Z"/><path d="M21 9 C23 9 23 11 23 11 M21 5 C26 5 27 10 27 11"/></symbol>
+          <symbol id="mm-f-pin" viewBox="0 0 32 32"><path d="M16 29 C16 29 7 19 7 12 A9 9 0 0 1 25 12 C25 19 16 29 16 29 Z"/><circle cx="16" cy="12" r="3"/></symbol>
+          <symbol id="mm-f-pct" viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><path d="M16 5 A11 11 0 0 1 26.5 19.4 L16 16 Z"/></symbol>
+          <symbol id="mm-f-core" viewBox="0 0 32 32"><path d="M6 10 C9 5 17 6 16 11 C15 15 8 16 6 10 Z M18 18 C21 13 28 15 27 21 C26 27 18 25 18 18 Z M7 21 C9 19 12 20 12 23 C12 26 8 26 7 21 Z"/></symbol>
+          <symbol id="mm-f-scale" viewBox="0 0 32 32"><path d="M16 5 V27 M10 27 H22 M6 9 H26 M6 9 L2 18 H10 Z M26 9 L22 18 H30 Z"/></symbol>
+          <symbol id="mm-f-doc" viewBox="0 0 32 32"><path d="M8 4 H20 L26 10 V28 H8 Z M20 4 V10 H26 M12 16 H22 M12 21 H22"/></symbol>
+        </defs>
+        <g id="mm-fh"></g><g id="mm-fl"></g><g id="mm-fd"></g><g id="mm-fc"></g><g id="mm-fn"></g>
+      </svg>
+    </div>
+    <div class="diagram" id="mm-d-over">
+      <svg id="mm-map" viewBox="0 0 1200 712" role="img" aria-label="Method diagram: forest, logging, roads, settlements and fire records feed the yearly range map; satellite images check the logging records; the map gives disturbance, core habitat and its causes.">
+        <defs>
+          <symbol id="mm-i-tree" viewBox="0 0 32 32"><path d="M16 3 L8 14 H12 L6 22 H26 L20 14 H24 Z M16 22 V29"/></symbol>
+          <symbol id="mm-i-axe" viewBox="0 0 32 32"><path d="M8 28 L22 8"/><path d="M18 5 C23 4 28 8 27 13 L22 14 L18 10 Z"/></symbol>
+          <symbol id="mm-i-road" viewBox="0 0 32 32"><path d="M11 3 L5 29 M21 3 L27 29"/><path d="M16 5 V9 M16 13 V17 M16 21 V25" /></symbol>
+          <symbol id="mm-i-built" viewBox="0 0 32 32"><path d="M4 28 V14 L11 18 V14 L18 18 V8 H24 V28 Z M4 28 H28"/><path d="M21 8 V4"/></symbol>
+          <symbol id="mm-i-fire" viewBox="0 0 32 32"><path d="M16 29 C9 29 6 24 7 19 C8 14 12 13 12 8 C16 10 18 13 17 17 C19 16 20 14 20 12 C24 15 26 19 25 22 C24 26 21 29 16 29 Z"/></symbol>
+          <symbol id="mm-i-sat" viewBox="0 0 32 32"><path d="M13 13 L19 19 M12 16 L16 12 L20 16 L16 20 Z"/><path d="M4 11 L9 6 L13 10 L8 15 Z M19 26 L24 21 L28 25 L23 30 Z"/><path d="M21 9 C23 9 23 11 23 11 M21 5 C26 5 27 10 27 11"/></symbol>
+          <symbol id="mm-i-caribou" viewBox="0 0 32 32"><path d="M12 20 C12 15 20 15 20 20 L19 27 H13 Z"/><path d="M13 17 C10 13 9 9 10 4 M10 9 L6 7 M11 13 L7 12 M19 17 C22 13 23 9 22 4 M22 9 L26 7 M21 13 L25 12"/></symbol>
+          <symbol id="mm-i-buf" viewBox="0 0 32 32"><rect x="12" y="12" width="8" height="8" rx="1"/><circle cx="16" cy="16" r="13" stroke-dasharray="3 3"/></symbol>
+          <symbol id="mm-i-pct" viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><path d="M16 5 A11 11 0 0 1 26.5 19.4 L16 16 Z"/></symbol>
+          <symbol id="mm-i-core" viewBox="0 0 32 32"><path d="M6 10 C9 5 17 6 16 11 C15 15 8 16 6 10 Z M18 18 C21 13 28 15 27 21 C26 27 18 25 18 18 Z M7 21 C9 19 12 20 12 23 C12 26 8 26 7 21 Z"/></symbol>
+          <symbol id="mm-i-scale" viewBox="0 0 32 32"><path d="M16 5 V27 M10 27 H22 M6 9 H26 M6 9 L2 18 H10 Z M26 9 L22 18 H30 Z"/></symbol>
+        </defs>
+        <text class="band" x="150" y="30">DATA</text>
+        <text class="band" x="420" y="30">RULES</text>
+        <text class="band" x="705" y="30">YEARLY MAP</text>
+        <text class="band" x="1040" y="30">RESULTS</text>
+        <g id="mm-links"></g>
+        <g id="mm-chips"></g>
+        <g id="mm-flows"></g>
+        <g id="mm-nodes"></g>
+      </svg>
+    </div>
+
+    <aside class="panel" id="mm-panel" aria-live="polite"></aside>
+  </div>
+
+  <div class="legend">
+    <span><i></i>goes into the map</span>
+    <span><i class="d"></i>used only to check</span>
+    <span><span class="tag study">published study</span> data the published study used</span>
+    <span><span class="tag added">added</span> added to reach 2025</span>
+    <span><span class="tag check">check</span> used only to check</span>
+  </div>
+
+  <div class="cks" id="mm-checks"></div>
+</div>
+
+
+
 
       <div class="scrolly">
         <div class="steps">
@@ -1149,6 +1183,108 @@ footer p { max-width: 100ch; }
 </aside>
 
 <style>
+  /* ---------- method diagram ---------- */
+#mm { --forest: #4fbf6e; --logging: #d0915a; --roads: #c9cfc4; --built: #7aa7e0; --fire: #f07a44; --sat: #8fb3cf; --human: #a89a88; --study: #9aa79c; --added: #d0915a; --check: #8fb3cf; display: grid; gap: 16px; margin-top: 24px; }
+#mm .mm-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px 20px; }
+#mm .mm-lede { margin: 0; color: var(--ink-2); max-width: 70ch; }
+#mm .stage { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 20px; align-items: start; }
+@media (max-width: 980px) { #mm .stage { grid-template-columns: 1fr; } }
+#mm .diagram { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; }
+#mm .diagram svg { display: block; width: 100%; min-width: 760px; height: auto; }
+#mm .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px 20px 18px; display: grid; gap: 10px; position: sticky; top: calc(16px + env(safe-area-inset-top, 0px)); }
+#mm .panel .kind { font: 500 .7rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+#mm .panel h2 { font: 700 1.45rem/1.1 var(--f-display); font-stretch: 85%; margin: 0; }
+#mm .panel p { margin: 0; color: var(--ink-2); font-size: .97rem; }
+#mm .panel ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+#mm .panel li { display: flex; gap: 8px; align-items: baseline; font-size: .92rem; color: var(--ink-2); }
+#mm .tag { font: 600 .62rem var(--f-mono); letter-spacing: .05em; text-transform: uppercase; padding: 1px 7px; border-radius: 999px; white-space: nowrap; }
+#mm .tag.study { background: #2b3a31; color: var(--ink-2); }
+#mm .tag.added { background: #4a3520; color: #f0c08f; }
+#mm .tag.check { border: 1px solid var(--sat); color: var(--sat); }
+#mm .panel .hint { font: 400 .78rem var(--f-mono); color: var(--ink-3); }
+#mm .stage.wide { grid-template-columns: 1fr; }
+#mm .stage.wide .panel { position: static; }
+#mm-flow { min-width: 960px; background: radial-gradient(ellipse at 70% 50%, #183024 0, #132019 55%); }
+#mm-flow .colh { font: 500 12.5px var(--f-mono); letter-spacing: .14em; fill: var(--ink-3); text-anchor: middle; }
+#mm-flow .fnode { cursor: pointer; transition: opacity .2s; }
+#mm-flow .fnode:focus { outline: none; }
+#mm-flow .fnode circle.disc { fill: #15261c; stroke-width: 2.2; transition: stroke-width .2s; }
+#mm-flow .fnode.ds circle.disc, #mm-flow .fnode.chk circle.disc { fill: #0f1c15; stroke-width: 1.8; }
+#mm-flow .fnode.op circle.disc { fill: #0c140f; stroke-width: 1.6; }
+#mm-flow .fnode:hover circle.disc, #mm-flow .fnode.on circle.disc, #mm-flow .fnode:focus-visible circle.disc { stroke-width: 3.6; }
+#mm-flow .nm { font: 600 13px var(--f-mono); fill: var(--ink); text-anchor: middle; }
+#mm-flow .nm.big { font: 700 16px var(--f-display); font-stretch: 85%; }
+#mm-flow .sb { font: 400 11px var(--f-mono); fill: var(--ink-3); text-anchor: middle; }
+#mm-flow .opglyph { fill: none; stroke: #e8f5ea; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+#mm-flow .opglyph.dots { stroke-width: 3; }
+#mm-flow .fnode.op .disc { fill: #102018; stroke-width: 2; }
+#mm-flow .fnode.kind .disc { fill: #15261c; stroke-width: 2.2; }
+#mm-flow .fnode.mix .disc { fill: #15261c; stroke-width: 2.4; stroke-linejoin: round; }
+#mm-flow .fnode.res .disc { fill: #0f1c15; stroke-width: 2.2; }
+#mm-flow .fnode:hover .disc, #mm-flow .fnode.on .disc, #mm-flow .fnode:focus-visible .disc { stroke-width: 3.6; }
+#mm-flow .nm.left, #mm-flow .sb.left { text-anchor: end; }
+#mm-flow .opdot { fill: #e8f5ea; }
+#mm-flow .rider { pointer-events: none; }
+#mm-flow.dim .rider { opacity: .25; }
+@media (prefers-reduced-motion: reduce) { #mm-flow .rider { display: none; } }
+#mm-flow .lk { fill: none; stroke-width: 1.9; opacity: .55; transition: opacity .2s, stroke-width .2s; }
+#mm-flow .lk.dash { stroke-dasharray: 5 5; opacity: .75; }
+#mm-flow .lk.on { opacity: 1; stroke-width: 2.8; }
+#mm-flow .chip rect { fill: var(--ground); stroke-width: 1.2; }
+#mm-flow .chip text { font: 600 11.5px var(--f-mono); fill: var(--ink); text-anchor: middle; }
+#mm-flow.dim .lk:not(.on) { opacity: .1; }
+#mm-flow.dim .fnode:not(.on) { opacity: .3; }
+#mm-flow.dim .chip:not(.on) { opacity: .25; }
+#mm .node { cursor: pointer; }
+#mm .node circle.disc { fill: #17271e; stroke-width: 2.5; transition: fill .2s, stroke-width .2s; }
+#mm .node:hover circle.disc, #mm .node.on circle.disc, #mm .node:focus-visible circle.disc { fill: #1d3326; stroke-width: 4; }
+#mm .node:focus { outline: none; }
+#mm .node text.name { font: 700 15px var(--f-display); font-stretch: 85%; fill: var(--ink); text-anchor: middle; }
+#mm .node text.sub { font: 400 11px var(--f-mono); fill: var(--ink-3); text-anchor: middle; }
+#mm .icon { fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#mm .link { fill: none; stroke-width: 2.2; opacity: .55; transition: opacity .2s, stroke-width .2s; }
+#mm .link.dash { stroke-dasharray: 5 6; }
+#mm .link.on { opacity: 1; stroke-width: 3.4; }
+#mm .dim .link:not(.on) { opacity: .14; }
+#mm .dim .node:not(.on) { opacity: .45; }
+#mm .dim .chip:not(.on) { opacity: .3; }
+#mm .chip rect { fill: var(--ground); stroke-width: 1.2; }
+#mm .chip text { font: 500 11px var(--f-mono); fill: var(--ink); text-anchor: middle; }
+#mm .flow { r: 3.2; }
+#mm .band { font: 500 11px var(--f-mono); letter-spacing: .12em; fill: var(--ink-3); text-anchor: middle; }
+#mm .hub-ring { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 2 6; opacity: .6; }
+#mm .cks { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 860px) { #mm .cks { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 460px) { #mm .cks { grid-template-columns: 1fr; } }
+#mm .ck { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: start; padding: 14px; border: 1px dashed #3a5146; border-radius: 14px; }
+#mm .ck svg { width: 44px; height: 44px; }
+#mm .ck b { font: 700 1rem/1.15 var(--f-display); font-stretch: 85%; display: block; margin-bottom: 3px; }
+#mm .ck span { font-size: .88rem; color: var(--ink-2); }
+#mm .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font: 400 .78rem var(--f-mono); color: var(--ink-3); }
+#mm .legend i { display: inline-block; width: 22px; height: 0; border-top: 2px solid var(--ink-3); vertical-align: middle; margin-right: 6px; }
+#mm .legend i.d { border-top-style: dashed; }
+@media (prefers-reduced-motion: reduce) { #mm .flow, #mm .fdot { display: none; } }
+#mm .views { display: inline-flex; gap: 4px; padding: 4px; border: 1px solid var(--line); border-radius: 999px; justify-self: start; }
+#mm .views button { font: 600 .8rem var(--f-mono); color: var(--ink-2); background: transparent; border: 0; border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+#mm .views button[aria-selected="true"] { background: var(--accent); color: var(--ground); }
+#mm .views button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+#mm-flow .fn { cursor: pointer; }
+#mm-flow .fn rect { stroke-width: 1.6; transition: stroke-width .2s; }
+#mm-flow .fn:hover rect, #mm-flow .fn.on rect, #mm-flow .fn:focus-visible rect { stroke-width: 3; }
+#mm-flow .fn:focus { outline: none; }
+#mm-flow .fn text { font: 600 12.5px var(--f-mono); fill: var(--ink); }
+#mm-flow .fn text.sm { font: 400 10.5px var(--f-mono); fill: var(--ink-3); }
+#mm-flow .fn.big text.t { font: 700 15px var(--f-display); font-stretch: 85%; }
+#mm-flow .fe { fill: none; stroke-width: 1.8; opacity: .5; transition: opacity .2s; }
+#mm-flow .fe.dash { stroke-dasharray: 5 5; }
+#mm-flow.dim .fe:not(.on) { opacity: .08; }
+#mm-flow.dim .fn:not(.on) { opacity: .3; }
+#mm-flow.dim .fl:not(.on) { opacity: .15; }
+#mm-flow .fe.on { opacity: 1; stroke-width: 2.6; }
+#mm-flow .fl rect { fill: var(--ground); stroke-width: 1; }
+#mm-flow .fl text { font: 500 10.5px var(--f-mono); fill: var(--ink-2); text-anchor: middle; }
+#mm-flow .col { font: 500 11px var(--f-mono); letter-spacing: .12em; fill: var(--ink-3); text-anchor: middle; }
+
 
 
   /* ---------- charts animate in the first time they scroll into view ---------- */
@@ -2724,6 +2860,7 @@ const S = {"built":"2026-10-05","years":[2015,2016,2017,2018,2019,2020,2021,2022
       renderAll();
       dispatchEvent(new Event('resize'));
       if (window.revealCheck) setTimeout(revealCheck, 50);
+      if (tab === 'how' && window.mmInit) window.mmInit();
     }
     function go(id, top) {
       const el = id && document.getElementById(id), sec = el && el.closest('main > section[data-tab]');
@@ -2744,4 +2881,380 @@ const S = {"built":"2026-10-05","years":[2015,2016,2017,2018,2019,2020,2021,2022
     go(location.hash.slice(1));
   })();
 })();
+
+window.mmInit = function () {
+  if (window.mmInit.done) return; window.mmInit.done = true;
+(function () {
+  const NS = 'http://www.w3.org/2000/svg';
+  const $ = s => document.querySelector(s);
+  const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+
+  // ---- nodes: data (left), hub (centre), results (right)
+  const N = {
+    forest: { x: 150, y: 90,  r: 44, c: '--forest',  icon: 'i-tree',  name: 'Forest', sub: 'where caribou can live',
+      kind: 'Data', title: 'Forest caribou can use', text: 'Conifer forest and treed wetland, from Canada\'s 30 m forest land-cover map. This is the habitat the map starts from.',
+      ds: [['VLCE2 land cover 2019', 'study']] },
+    logging: { x: 150, y: 210, r: 44, c: '--logging', icon: 'i-axe', name: 'Logging', sub: 'since 1980',
+      kind: 'Data', title: 'Logging', text: 'Every cut since 1980. Ontario\'s forest inventory and Canada\'s Landsat harvest map carry it to 2020; Ontario\'s annual reports (ARI) carry it to 2025.',
+      ds: [['FRI forest inventory', 'study'], ['NTEMS harvest 1985–2020', 'study'], ['ARI annual reports', 'added']] },
+    roads: { x: 150, y: 330, r: 44, c: '--roads', icon: 'i-road', name: 'Roads', sub: 'by year built',
+      kind: 'Data', title: 'Roads', text: 'Provincial forest roads, dated by the year they were built, plus the national road network.',
+      ds: [['MNRF road segments', 'study'], ['NRN national roads', 'study']] },
+    built: { x: 150, y: 450, r: 44, c: '--built', icon: 'i-built', name: 'Mines, towns', sub: 'and farms',
+      kind: 'Data', title: 'Mines, towns, farms and other cleared land', text: 'Ontario\'s land-cover compilation. Its "disturbance" class mixes cuts and burns, so inside a mapped fire it counts as that fire.',
+      ds: [['OLCC land cover 2000–2011', 'study']] },
+    fire: { x: 150, y: 570, r: 44, c: '--fire', icon: 'i-fire', name: 'Wildfire', sub: 'from 1985',
+      kind: 'Data', title: 'Wildfire', text: 'Fire perimeters from the provinces\' national database and a satellite-mapped burned-area record that reaches 2025.',
+      ds: [['NFDB fire perimeters', 'study'], ['NBAC burned area 1985–2025', 'added']] },
+    sat: { x: 285, y: 148, r: 27, c: '--sat', icon: 'i-sat', name: 'Satellites', sub: 'check only', check: true,
+      kind: 'Check', title: 'Satellite images', text: 'Every ARI logging stand from 2013 on is checked on summer images. Stands with no visible cut are left out.',
+      ds: [['Landsat 8/9', 'check'], ['Sentinel-2', 'check']] },
+    hub: { x: 705, y: 390, r: 112, c: '--accent', icon: 'i-caribou', name: 'Range map, 30 m', sub: 'every year 2015–2025', hub: true,
+      kind: 'Yearly map', title: 'The range map, every year', text: 'For each of the seven ranges and each year from 2015 to 2025, every 30 m pixel is marked as habitat, disturbed or neither. Disturbance from any source counts once.',
+      ds: [['Range boundaries', 'study'], ['Managed forest (FMU)', 'study']] },
+    rhab: { x: 420, y: 90, r: 50, c: '--forest', icon: 'i-tree', name: 'Habitat only', sub: 'conifer + treed wetland', rule: true,
+      kind: 'Rule', title: 'Keep only caribou habitat', text: 'Only conifer forest and treed wetland count as habitat. Everything else is set aside before any disturbance is considered.', ds: [] },
+    rsat: { x: 420, y: 215, r: 50, c: '--sat', icon: 'i-sat', name: 'Seen from space', sub: 'ARI 2013 + tested', rule: true,
+      kind: 'Rule', title: 'Only cuts seen from space', text: 'Each ARI logging stand from 2013 on is kept only if at least half of it shows a clear cut on Landsat or Sentinel-2 summer images.', ds: [['Landsat 8/9', 'check'], ['Sentinel-2', 'check']] },
+    rbuf: { x: 420, y: 360, r: 56, c: '--human', icon: 'i-buf', name: '500 m buffer', sub: 'around human disturbance', rule: true,
+      kind: 'Rule', title: '500 m buffer zone', text: 'Logging, roads, mines, towns and farms each count with a 500 m buffer zone around them, as in Canada\'s method: caribou avoid them, and roads let predators in.', ds: [] },
+    rburn: { x: 420, y: 495, r: 50, c: '--built', icon: 'i-fire', name: 'Burns = fire', sub: 'land-cover class 18', rule: true,
+      kind: 'Rule', title: 'Burns count as fire', text: 'Ontario\'s land cover has a "disturbance" class that mixes cuts and burns. Where it lies inside a fire mapped from 1985 on, it counts as that fire, not as human disturbance.', ds: [['PLC2000 confirms the burns', 'check']] },
+    rfire: { x: 420, y: 625, r: 50, c: '--fire', icon: 'i-fire', name: 'Fire from 1985', sub: 'no buffer zone', rule: true,
+      kind: 'Rule', title: 'Fire from 1985, no buffer zone', text: 'Fires count from 1985 in every year, so no fire is counted one year and dropped the next. Burned areas get no buffer zone.', ds: [] },
+    pct: { x: 1040, y: 110, r: 52, c: '--accent', icon: 'i-pct', name: '% disturbed', sub: 'vs the 35% limit',
+      kind: 'Result', title: 'Share of each range disturbed', text: 'Compared with Canada\'s 35% limit, above which a herd is unlikely to sustain itself. Measured inside the managed forest, and over the whole range.', ds: [] },
+    core: { x: 1040, y: 280, r: 52, c: '--forest', icon: 'i-core', name: 'Core habitat', sub: 'blocks of 100 ha +',
+      kind: 'Result', title: 'Core habitat', text: 'Undisturbed habitat with a 30 m edge removed, joined into patches. Only patches of 100 ha or more count.', ds: [] },
+    rhum: { x: 1040, y: 450, r: 52, c: '--human', icon: 'i-built', name: 'Human', sub: 'anthropogenic %',
+      kind: 'Result', title: 'Human disturbance', text: 'Share of each range disturbed by logging, roads, mines, towns and other human activity, with their 500 m buffer zones.', ds: [] },
+    rfire2: { x: 1040, y: 620, r: 52, c: '--fire', icon: 'i-fire', name: 'Wildfire', sub: 'fire only %',
+      kind: 'Result', title: 'Wildfire', text: 'Share of each range burned since 1985 and not also disturbed by people.', ds: [] },
+  };
+  // ---- links: from, to, rule chip, dashed?
+  const L = [
+    ['forest', 'rhab', '', false], ['logging', 'rsat', '', false], ['sat', 'rsat', '', true], ['rsat', 'rbuf', '', false],
+    ['roads', 'rbuf', '', false], ['built', 'rbuf', '', false], ['built', 'rburn', '', true], ['rburn', 'rfire', '', false], ['fire', 'rfire', '', false],
+    ['rhab', 'hub', '', false], ['rbuf', 'hub', '', false], ['rfire', 'hub', '', false],
+    ['hub', 'pct', '', false], ['hub', 'core', '', false], ['hub', 'rhum', '', false], ['hub', 'rfire2', '', false],
+  ];
+  const css = v => getComputedStyle(document.getElementById('mm')).getPropertyValue(v).trim();
+  const links = $('#mm-links'), chips = $('#mm-chips'), nodes = $('#mm-nodes'), flows = $('#mm-flows');
+  const paths = [];
+
+  function curve(a, b) {
+    if (a.x === b.x && a.rule && b.rule) { const d = b.y > a.y ? 1 : -1; return `M${a.x} ${a.y + d * a.r} L${b.x} ${b.y - d * b.r}`; }   // rule to rule: straight down
+    // horizontal S-curve between circle edges; the satellite and land-cover side links bend along the left column
+    if (a.x === b.x) {
+      const sx = a.x + a.r * .7, ex = b.x + b.r * .7, bend = 120;
+      return `M${sx} ${a.y + (b.y < a.y ? -a.r * .7 : a.r * .7)} C${sx + bend} ${a.y} ${ex + bend} ${b.y} ${ex} ${b.y + (b.y < a.y ? b.r * .7 : -b.r * .7)}`;
+    }
+    const ang = Math.atan2(b.y - a.y, b.x - a.x), ang2 = Math.atan2(a.y - b.y, a.x - b.x);
+    const sx = a.x + a.r * Math.cos(ang) * (a.hub ? 1 : 1), sy = a.y + a.r * Math.sin(ang);
+    const ex = b.x + b.r * Math.cos(ang2), ey = b.y + b.r * Math.sin(ang2);
+    const mx = (sx + ex) / 2;
+    return `M${sx} ${sy} C${mx} ${sy} ${mx} ${ey} ${ex} ${ey}`;
+  }
+  L.forEach(([f, t, rule, dash], i) => {
+    const a = N[f], b = N[t], col = css(a.hub ? b.c : a.c);
+    const p = el('path', { d: curve(a, b), class: 'link' + (dash ? ' dash' : ''), stroke: col, 'data-a': f, 'data-b': t }, links);
+    paths.push(p);
+    if (rule) {
+      const len = p.getTotalLength();
+      let pt = p.getPointAtLength(len * .5);
+      if (a.x !== b.x && !a.hub) { let best = 1e9; for (let s = 0; s <= len; s += 2) { const q = p.getPointAtLength(s); if (Math.abs(q.x - 400) < best) { best = Math.abs(q.x - 400); pt = q; } } }
+      const g = el('g', { class: 'chip', 'data-a': f, 'data-b': t }, chips);
+      const w = rule.length * 6.9 + 18;
+      el('rect', { x: pt.x - w / 2, y: pt.y - 11, width: w, height: 22, rx: 11, stroke: col }, g);
+      el('text', { x: pt.x, y: pt.y + 4 }, g).textContent = rule;
+    }
+    if (!dash) {                                    // a dot travelling along each link into (or out of) the map
+      const dot = el('circle', { class: 'flow', fill: col, r: 3.2 }, flows);
+      const len = p.getTotalLength();
+      let t0 = i * 400;
+      const step = now => { const k = ((now + t0) % 2600) / 2600; const q = p.getPointAtLength(k * len); dot.setAttribute('cx', q.x); dot.setAttribute('cy', q.y); requestAnimationFrame(step); };
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(step);
+    }
+  });
+
+  Object.entries(N).forEach(([id, n]) => {
+    const g = el('g', { class: 'node', tabindex: 0, role: 'button', 'aria-label': n.title, 'data-id': id }, nodes);
+    if (n.hub) el('circle', { cx: n.x, cy: n.y, r: n.r + 14, class: 'hub-ring' }, g);
+    el('circle', { cx: n.x, cy: n.y, r: n.r, class: 'disc', stroke: css(n.c), 'stroke-dasharray': n.check ? '6 5' : 'none' }, g);
+    const s = n.hub ? 64 : n.r < 30 ? n.r * 1.1 : n.r * .78;
+    el('use', { href: '#mm-' + n.icon, x: n.x - s / 2, y: n.y - (n.hub ? 70 : n.r < 30 ? s / 2 : n.r * .7), width: s, height: s, class: 'icon', stroke: css(n.c) }, g);
+    const ny = n.r < 30 ? n.y + n.r + 14 : n.y + (n.hub ? 22 : n.r * .42);          // small circles: name under the circle
+    const tn = el('text', { x: n.x, y: ny, class: 'name' }, g); tn.textContent = n.name; if (n.hub) tn.style.fontSize = '22px'; else if (n.rule) tn.style.fontSize = '11.5px'; else if (n.name.length > 10) tn.style.fontSize = '13px';
+    const ts = el('text', { x: n.x, y: n.hub ? ny + 20 : n.r < 30 ? ny + 12 : n.y + n.r + 16, class: 'sub' }, g); ts.textContent = n.sub; if (n.hub) ts.style.fontSize = '13px';
+    if (n.hub) { const t3 = el('text', { x: n.x, y: ny + 40, class: 'sub' }, g); t3.textContent = '7 ranges · Ontario'; }
+    const on = () => focus(id), off = () => focus(null);
+    g.addEventListener('pointerenter', on); g.addEventListener('focus', on);
+    g.addEventListener('pointerleave', off); g.addEventListener('blur', off);
+    g.addEventListener('click', on);
+  });
+
+  const svg = $('#mm-map');
+  function focus(id) {
+    svg.classList.toggle('dim', !!id);
+    document.querySelectorAll('#mm .node').forEach(g => g.classList.toggle('on', g.dataset.id === id));
+    document.querySelectorAll('#mm .link, #mm .chip').forEach(e => e.classList.toggle('on', !!id && (e.dataset.a === id || e.dataset.b === id)));
+    if (id) document.querySelectorAll('#mm .link.on, #mm .chip.on').forEach(e => document.querySelector(`#mm .node[data-id="${e.dataset.a === id ? e.dataset.b : e.dataset.a}"]`).classList.add('on'));
+    panel(id || 'hub', !id);
+  }
+  function panel(id, rest) {
+    const n = N[id];
+    $('#mm-panel').innerHTML = `<span class="kind">${n.kind}</span><h2>${n.title}</h2><p>${n.text}</p>` +
+      (n.ds.length ? '<ul>' + n.ds.map(d => `<li><span class="tag ${d[1]}">${{ study: 'published study', added: 'added', check: 'check' }[d[1]]}</span>${d[0]}</li>`).join('') + '</ul>' : '') +
+      (rest ? '<span class="hint">Point at any circle for its datasets and rule.</span>' : '');
+  }
+  panel('hub', true);
+
+
+  /* ================= data flow (deep view) =================
+     shapes by stage: dataset = small circle, kind of data = rounded square, combined = hexagon, operation = diamond, result = circle.
+     Dots ride whole routes from a dataset to a result and loop around every shape on the way. */
+  (function deepFlow() {
+    const F = $('#mm-flow'), reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const C = { study: '#9aa79c', added: '#d0915a', check: '#8fb3cf', forest: '#4fbf6e', logging: '#d0915a', roads: '#c9cfc4', built: '#7aa7e0', fire: '#f07a44', human: '#a89a88', accent: '#5bd486', ink: '#e8eee6', op: '#cfe7d4' };
+    const X = { ds: 205, kind: 335, rule: 482, mix: 640, op1: 815, op2: 1000, res: 1170 };
+    // id: [x, y, size, colour, icon, name, sub, stage, explanation]
+    // size: dataset/result = radius; kind = half side; combined = hexagon radius; operation = half diagonal
+    const N = {
+      vlce2: [X.ds, 72, 14, 'study', 'f-tree', 'VLCE2', 'study', 'ds', 'Canada\'s 30 m forest land-cover map, 2019.'],
+      fri: [X.ds, 166, 13, 'study', 'f-doc', 'FRI', 'study', 'ds', 'Ontario\'s Forest Resources Inventory: logging since 1980, planted stands and corridors.'],
+      ntems: [X.ds, 202, 13, 'study', 'f-axe', 'NTEMS harvest', 'study', 'ds', 'Canada\'s Landsat harvest map, 1985–2020, with the year of each cut.'],
+      ari: [X.ds, 238, 13, 'added', 'f-doc', 'ARI', 'added', 'ds', 'Ontario\'s annual logging reports: the only logging record after 2020.'],
+      sat: [X.ds - 70, 270, 12, 'check', 'f-sat', 'Satellites', 'tests ARI', 'chk', 'Landsat 8/9 and Sentinel-2 summer images. Every ARI logging stand from 2013 on is tested; stands with no visible cut are left out.'],
+      mnrf: [X.ds, 330, 13, 'study', 'f-road', 'MNRF roads', 'study', 'ds', 'Ontario\'s road segments, with the year each road was built.'],
+      nrn: [X.ds, 366, 13, 'study', 'f-road', 'NRN', 'study', 'ds', 'Canada\'s national road network.'],
+      olcc: [X.ds, 458, 13, 'study', 'f-built', 'OLCC', 'study', 'ds', 'Ontario\'s land-cover compilation: mines (25), towns (27), farms (28), and a disturbance class (18) that mixes cuts and burns.'],
+      plc: [X.ds - 70, 492, 12, 'check', 'f-built', 'PLC2000', 'checks burns', 'chk', 'Ontario\'s 2000 land cover still splits cuts from burns. It confirms that the burns in OLCC class 18 lie inside mapped fires.'],
+      nfdb: [X.ds, 566, 13, 'study', 'f-fire', 'NFDB', 'study', 'ds', 'National Fire Database: fire perimeters from the provinces.'],
+      nbac: [X.ds, 602, 13, 'added', 'f-fire', 'NBAC', 'added', 'ds', 'National Burned Area Composite: satellite-mapped burns, the only fire source for 2025.'],
+      ranges: [X.ds, 692, 13, 'study', 'f-pin', 'Ranges', 'study', 'ds', 'The seven Ontario caribou range boundaries.'],
+      fmu: [X.ds, 728, 13, 'study', 'f-tree', 'FMU', 'study', 'ds', 'Forest management units: the managed forest.'],
+      forest: [X.kind, 72, 40, 'forest', 'f-tree', 'Forest', 'conifer + treed wetland', 'kind', 'VLCE2 classes kept as potential habitat: conifer forest and treed wetland.'],
+      log: [X.kind, 202, 40, 'logging', 'f-axe', 'Logging', 'FRI ∪ NTEMS ∪ ARI', 'kind', 'Union of FRI, NTEMS and ARI cuts since 1980 (NTEMS gives the year where both record one; ARI fills the rest and goes past 2020), plus planted stands and corridors.'],
+      road: [X.kind, 348, 40, 'roads', 'f-road', 'Roads', 'MNRF (≤ year) ∪ NRN', 'kind', 'Union of MNRF roads built by each year and NRN roads.'],
+      land: [X.kind, 470, 40, 'built', 'f-built', 'Land cover', 'OLCC 25 · 27 · 28 · 18', 'kind', 'Mines, towns and farms, plus OLCC\'s disturbance class 18, which is split by fire.'],
+      fire: [X.kind, 584, 40, 'fire', 'f-fire', 'Fire', 'NFDB ∪ NBAC', 'kind', 'Union of NFDB and NBAC perimeters from 1985 to each map year.'],
+      area: [X.kind, 710, 40, 'accent', 'f-pin', 'Range area', 'ranges ∩ FMU', 'kind', 'Each range intersected with the managed forest (the published study\'s basis), and the whole range.'],
+      hab: [X.mix, 72, 46, 'forest', 'f-tree', 'Habitat', 'potential', 'mix', 'Potential habitat inside each range.'],
+      human: [X.mix, 348, 62, 'human', 'f-built', 'Human', '⊕ 500 m · union', 'mix', 'Union of logging, roads, land cover and the rest of class 18, each grown by a 500 m buffer zone.'],
+      wild: [X.mix, 584, 52, 'fire', 'f-fire', 'Wildfire', '+ class 18 burns', 'mix', 'Fire from 1985, plus class 18 inside those fires. No buffer zone.'],
+      sub: [X.op1, 72, 25, 'op', 'minus', 'Undisturbed', 'habitat − disturbed', 'op', 'Subtract: potential habitat minus everything disturbed.'],
+      uni: [X.op1, 466, 25, 'op', 'union', 'Disturbed', 'human ∪ wildfire', 'op', 'Union: a place is disturbed if any source marks it. Overlaps count once.'],
+      mspa: [X.op2, 72, 25, 'op', 'core', 'Core patches', '−30 m edge · ≥ 100 ha', 'op', 'MSPA: remove a 30 m edge, join touching pixels into patches, keep patches of 100 ha or more.'],
+      r1: [X.op2, 300, 25, 'op', 'div', 'Share', 'disturbed ∩ area ÷ area', 'op', 'Area of disturbed land inside the range area, divided by the range area.'],
+      r2: [X.op2, 466, 25, 'op', 'div', 'Share', 'human ∩ area ÷ area', 'op', 'Area of human disturbance inside the range area, divided by the range area. Overlaps with fire count as human.'],
+      r3: [X.op2, 632, 25, 'op', 'div', 'Share', '(fire − human) ÷ area', 'op', 'Area burned and not also disturbed by people, divided by the range area.'],
+      core: [X.res, 72, 32, 'forest', 'f-core', 'Core habitat', 'ha, every year', 'res', 'Core habitat in patches of 100 ha or more, for each range and year.'],
+      pct: [X.res, 300, 32, 'ink', 'f-pct', '% disturbed', 'vs the 35% limit', 'res', 'Share of each range disturbed, compared with Canada\'s 35% limit.'],
+      rh: [X.res, 466, 32, 'human', 'f-built', 'Human %', 'anthropogenic', 'res', 'Share of each range disturbed by people.'],
+      rf: [X.res, 632, 32, 'fire', 'f-fire', 'Wildfire %', 'fire only', 'res', 'Share of each range burned and not also disturbed by people.'],
+      eccc: [X.res + 82, 300, 12, 'check', 'f-scale', 'ECCC 2020', 'compared', 'chk', 'Environment and Climate Change Canada\'s 2020 map: compared with the result, not used in it.'],
+    };
+    const ROLE = { study: 'published study', added: 'added', check: 'check' };
+    Object.values(N).forEach(n => { n[1] = Math.round(40 + (n[1] - 18) * 1.13); });          // more room between rows
+    // outline of each shape, clockwise on screen (null for circles)
+    const POLY = id => {
+      const [x, y, s, , , , , st] = N[id];
+      if (st === 'kind') return [[x - s, y - s], [x + s, y - s], [x + s, y + s], [x - s, y + s]];
+      if (st === 'mix') return Array.from({ length: 6 }, (_, k) => { const a = Math.PI / 6 + k * Math.PI / 3; return [x + s * Math.cos(a), y + s * Math.sin(a)]; });
+      if (st === 'op') return [[x, y - s], [x + s, y], [x, y + s], [x - s, y]];
+      return null;
+    };
+    // where a ray from the centre at angle a leaves the shape: [point, edge index, position along edge]
+    function edgeHit(id, a) {
+      const [x, y, s] = N[id], P = POLY(id), dx = Math.cos(a), dy = Math.sin(a);
+      if (!P) return { p: [x + (s + 2) * dx, y + (s + 2) * dy] };
+      for (let i = 0; i < P.length; i++) {
+        const [ax, ay] = P[i], [bx, by] = P[(i + 1) % P.length], ex = bx - ax, ey = by - ay, den = dx * ey - dy * ex;
+        if (Math.abs(den) < 1e-9) continue;
+        const tt = ((ax - x) * ey - (ay - y) * ex) / den, u = ((ax - x) * dy - (ay - y) * dx) / den;
+        if (tt > 0 && u >= -1e-6 && u <= 1 + 1e-6) return { p: [x + tt * dx, y + tt * dy], i, u };
+      }
+      return { p: [x, y] };
+    }
+    // clockwise walk along the outline from one edge point to another (a loop around the shape)
+    function around(id, h0, h1) {
+      const P = POLY(id), n = P.length; let d = '', i = h0.i;
+      if (h0.i === h1.i && h1.u > h0.u) { for (let k = 1; k <= n; k++) d += ` L${P[(i + k) % n][0]} ${P[(i + k) % n][1]}`; }
+      else { while (i !== h1.i) { i = (i + 1) % n; d += ` L${P[i][0]} ${P[i][1]}`; } }
+      return d + ` L${h1.p[0]} ${h1.p[1]}`;
+    }
+    const E = [
+      ['vlce2', 'forest'], ['fri', 'log'], ['ntems', 'log'], ['ari', 'log'], ['sat', 'ari', '', 1], ['mnrf', 'road'], ['nrn', 'road'],
+      ['olcc', 'land'], ['plc', 'olcc', '', 1], ['nfdb', 'fire'], ['nbac', 'fire'], ['ranges', 'area'], ['fmu', 'area'],
+      ['forest', 'hab', 'keep 2 classes'], ['log', 'human'], ['road', 'human', '⊕ 500 m buffer'], ['land', 'human', 'rest of 18'],
+      ['land', 'wild', '', 1], ['fire', 'wild', '≥ 1985 · no buffer'],
+      ['hab', 'sub'], ['human', 'uni'], ['wild', 'uni'], ['uni', 'sub'], ['sub', 'mspa'], ['mspa', 'core'],
+      ['uni', 'r1'], ['human', 'r2'], ['wild', 'r3'], ['area', 'r1'], ['area', 'r2'], ['area', 'r3'],
+      ['r1', 'pct'], ['r2', 'rh'], ['r3', 'rf'], ['eccc', 'pct', '', 1],
+    ];
+    // where along x each rule chip sits (kept apart so none overlap)
+    const CHIPX = { 'forest>hab': 482, 'road>human': 515, 'land>human': 452, 'land>wild': 470, 'fire>wild': 482 };
+    const heads = $('#mm-fh');
+    [['DATASETS', 150], ['LAYERS', X.kind], ['RULE', X.rule], ['COMBINED', X.mix], ['OPERATIONS', (X.op1 + X.op2) / 2], ['RESULTS', X.res]].forEach(([s, x]) => { el('text', { x, y: 22, class: 'colh' }, heads).textContent = s; });
+
+    // geometry of one link (also reused to build the dot routes)
+    function seg(a, b) {
+      const A = N[a], B = N[b];
+      let ang = Math.atan2(B[1] - A[1], B[0] - A[0]);
+      const fwd = B[0] > A[0] + 1;                                       // left-to-right links leave on the right side and arrive on the left side
+      const out = a === 'land' && b === 'wild' ? Math.PI / 4 : fwd ? 0 : ang;     // class 18 burns leave Land cover from its lower corner
+      const h0 = edgeHit(a, out), h1 = edgeHit(b, fwd ? Math.PI : ang + Math.PI), s = h0.p, e = h1.p;
+      if (Math.abs(A[0] - B[0]) < 1) return { d: `M${s[0]} ${s[1]} L${e[0]} ${e[1]}`, s, e, h0, h1 };
+      if (a === 'area') {                                                // range area: along the bottom, up a clear lane, then into the share
+        const xt = { r1: 892, r2: 904, r3: 916 }[b], r = 10, up = e[1] < s[1] ? -1 : 1;
+        return { d: `M${s[0]} ${s[1]} H${xt - r} Q${xt} ${s[1]} ${xt} ${s[1] + up * r} V${e[1] - up * r} Q${xt} ${e[1]} ${xt + r} ${e[1]} H${e[0]}`, s, e, h0, h1 };
+      }
+      const run = Math.min(70, Math.max(0, (e[0] - s[0]) * .35)), ex = e[0] - run, mx = (s[0] + ex) / 2;
+      return { d: `M${s[0]} ${s[1]} C${mx} ${s[1]} ${mx} ${e[1]} ${ex} ${e[1]} L${e[0]} ${e[1]}`, s, e, h0, h1 };
+    }
+    const links = E.map(([a, b, rule, dash]) => {
+      const c = C[N[a][3]] || '#9aa79c', g = seg(a, b);
+      const p = el('path', { d: g.d, class: 'lk' + (dash ? ' dash' : ''), stroke: c }, $('#mm-fl'));
+      let chip = null;
+      if (rule) {
+        const len = p.getTotalLength(), tx = CHIPX[a + '>' + b] || X.rule; let q = p.getPointAtLength(len / 2), best = 1e9;
+        for (let s = 0; s <= len; s += 2) { const r = p.getPointAtLength(s); if (Math.abs(r.x - tx) < best) { best = Math.abs(r.x - tx); q = r; } }
+        const w = rule.length * 7.2 + 18;
+        chip = el('g', { class: 'chip' }, $('#mm-fc'));
+        el('rect', { x: q.x - w / 2, y: q.y - 12, width: w, height: 24, rx: 12, stroke: c }, chip);
+        el('text', { x: q.x, y: q.y + 4.2 }, chip).textContent = rule;
+      }
+      return { a, b, p, chip };
+    });
+
+    // shapes
+    const hex = (x, y, r) => Array.from({ length: 6 }, (_, k) => { const a = Math.PI / 6 + k * Math.PI / 3; return `${(x + r * Math.cos(a)).toFixed(1)},${(y + r * Math.sin(a)).toFixed(1)}`; }).join(' ');
+    const OPS = {                                                          // operator glyphs, drawn at (0,0), about 26 px
+      union: 'M-7 -8 V1 A7 7 0 0 0 7 1 V-8', minus: 'M-8 0 H8', div: 'M-8 0 H8',
+      core: 'M-8 -4 C-6 -9 0 -7 -1 -3 C-2 1 -7 1 -8 -4 Z M1 2 C3 -2 8 -1 8 3 C7 8 1 7 1 2 Z',
+    };
+    const nodeG = {};
+    Object.entries(N).forEach(([id, n]) => {
+      const [x, y, s, ck, icon, name, sub, stage] = n, c = C[ck];
+      const g = el('g', { class: 'fnode ' + stage, tabindex: 0, role: 'button', 'aria-label': name, 'data-id': id }, $('#mm-fn'));
+      if (stage === 'kind') el('rect', { x: x - s, y: y - s, width: 2 * s, height: 2 * s, rx: 6, class: 'disc', stroke: c }, g);
+      else if (stage === 'mix') el('polygon', { points: hex(x, y, s), class: 'disc', stroke: c }, g);
+      else if (stage === 'op') el('polygon', { points: `${x},${y - s} ${x + s},${y} ${x},${y + s} ${x - s},${y}`, class: 'disc', stroke: c, 'stroke-linejoin': 'round' }, g);
+      else el('circle', { cx: x, cy: y, r: s, class: 'disc', stroke: c, 'stroke-dasharray': stage === 'chk' ? '3 3' : 'none' }, g);
+      if (stage === 'op') {
+        el('path', { d: OPS[icon], transform: `translate(${x} ${y})`, class: 'opglyph' }, g);
+        if (icon === 'div') { el('circle', { cx: x, cy: y - 6, r: 2, class: 'opdot' }, g); el('circle', { cx: x, cy: y + 6, r: 2, class: 'opdot' }, g); }
+        const up = id === 'sub' || id === 'mspa';
+        el('text', { x, y: up ? y - s - 22 : y + s + 17, class: 'nm' }, g).textContent = name;
+        el('text', { x, y: up ? y - s - 9 : y + s + 31, class: 'sb' }, g).textContent = sub;
+      } else if (stage === 'ds' || stage === 'chk') {                     // small circle, label on the left
+        el('use', { href: '#mm-' + icon, x: x - s * .62, y: y - s * .62, width: s * 1.24, height: s * 1.24, class: 'icon', stroke: c }, g);
+        if (id === 'eccc') {
+          el('text', { x, y: y + s + 13, class: 'nm' }, g).textContent = name;
+          el('text', { x, y: y + s + 24, class: 'sb' }, g).textContent = sub;
+        } else {
+          el('text', { x: x - s - 8, y: y + 1, class: 'nm left' }, g).textContent = name;
+          el('text', { x: x - s - 8, y: y + 13, class: 'sb left' }, g).textContent = sub;
+        }
+      } else if (stage === 'res') {
+        el('use', { href: '#mm-' + icon, x: x - 14, y: y - 14, width: 28, height: 28, class: 'icon', stroke: c }, g);
+        el('text', { x, y: y + s + 19, class: 'nm big' }, g).textContent = name;
+        el('text', { x, y: y + s + 34, class: 'sb' }, g).textContent = sub;
+      } else {                                                            // kind (square) and combined (hexagon): icon and name inside
+        const is = stage === 'mix' ? s * .62 : s * .74;
+        el('use', { href: '#mm-' + icon, x: x - is / 2, y: y - is * .86, width: is, height: is, class: 'icon', stroke: c }, g);
+        const tn = el('text', { x, y: y + s * .5, class: 'nm big' }, g); tn.textContent = name; if (stage === 'kind') tn.style.fontSize = '14.5px';
+        el('text', { x, y: y + s + 17, class: 'sb' }, g).textContent = sub;
+      }
+      nodeG[id] = g;
+      const on = () => light(id), off = () => light(null);
+      g.addEventListener('pointerenter', on); g.addEventListener('focus', on); g.addEventListener('pointerleave', off); g.addEventListener('blur', off); g.addEventListener('click', on);
+    });
+
+    // relay animation: stage by stage, a dot in each source's colour runs along every link, loops the outline of the
+    // shape it reaches, and leaves as one dot in that shape's colour for the next step
+    const live = links.filter(l => !E.find(e => e[0] === l.a && e[1] === l.b)[3]);            // solid links only (checks are dashed)
+    const level = {};
+    const lv = id => {
+      if (level[id] !== undefined) return level[id];
+      const ins = live.filter(l => l.b === id);
+      return (level[id] = ins.length ? Math.max(...ins.map(l => lv(l.a))) + 1 : 0);
+    };
+    Object.keys(N).forEach(lv);
+    const TE = 2800, TL = 4800, S = TE + TL, LEVELS = Math.max(...Object.values(level)), P = (LEVELS + 1) * S;
+    // a lap path around a shape: in on the left, round the whole outline, out on the right
+    function lapPath(id) {
+      const P0 = POLY(id), [x, y, s] = N[id];
+      if (!P0) { const r = s + 3; return `M${x - r} ${y} A${r} ${r} 0 1 1 ${x + r} ${y} A${r} ${r} 0 1 1 ${x - r} ${y} A${r} ${r} 0 1 1 ${x + r} ${y}`; }
+      const hin = edgeHit(id, Math.PI), hout = edgeHit(id, 0), n = P0.length;
+      let d = `M${hin.p[0]} ${hin.p[1]}`, k = hin.i;
+      for (let m = 1; m <= n; m++) { const v = P0[(k + m) % n]; d += ` L${v[0]} ${v[1]}`; }           // one full lap
+      d += ` L${hin.p[0]} ${hin.p[1]}`;
+      return d + around(id, hin, hout);                                                               // then on to the exit
+    }
+    const ghosts = el('g', { class: 'ghost' }, F), riders = el('g', {}, $('#mm-fd'));
+    const edgeDots = live.map(l => ({ l, L: level[l.b] - 1, len: l.p.getTotalLength(), c: el('circle', { r: 3.4, fill: C[N[l.a][3]] || '#9aa79c', class: 'rider', opacity: 0 }, riders) }));
+    const laps = Object.keys(N).filter(id => live.some(l => l.b === id)).map(id => {
+      const path = el('path', { d: lapPath(id), fill: 'none', stroke: 'none' }, ghosts);
+      const inL = [level[id] - 1];                          // every input arrives in the same stage, so they merge
+      return { id, path, len: path.getTotalLength(), inL, c: el('circle', { r: 4.2, fill: C[N[id][3]] || '#e8eee6', class: 'rider lap', opacity: 0 }, riders) };
+    });
+    if (!reduce) {
+      const ease = k => k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      const tick = () => {
+        // a new wave every step: all links carry dots at the same time, then every shape is lapped at the same time
+        const ph = performance.now() % S, travel = ph < TE, k = travel ? ph / TE : (ph - TE) / TL;
+        edgeDots.forEach(d => {
+          if (travel) { const q = d.l.p.getPointAtLength(ease(k) * d.len); d.c.setAttribute('cx', q.x); d.c.setAttribute('cy', q.y); d.c.setAttribute('opacity', 1); }
+          else d.c.setAttribute('opacity', 0);
+        });
+        laps.forEach(lp => {
+          if (!travel) { const q = lp.path.getPointAtLength(ease(k) * lp.len); lp.c.setAttribute('cx', q.x); lp.c.setAttribute('cy', q.y); lp.c.setAttribute('opacity', 1); }
+          else lp.c.setAttribute('opacity', 0);
+        });
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }
+
+    function light(id) {
+      F.classList.toggle('dim', !!id);
+      const keep = new Set(id ? [id] : []), on = new Set();
+      if (id) for (const dir of [1, 0]) { const st = [id]; while (st.length) { const v = st.pop(); links.forEach((l, i) => { const [f, t] = dir ? [l.a, l.b] : [l.b, l.a]; if (f === v && !on.has(i)) { on.add(i); keep.add(t); st.push(t); } }); } }
+      links.forEach((l, i) => { l.p.classList.toggle('on', on.has(i)); if (l.chip) l.chip.classList.toggle('on', on.has(i)); });
+      Object.entries(nodeG).forEach(([k, g]) => g.classList.toggle('on', keep.has(k)));
+      const n = N[id || 'uni'];
+      const kind = { ds: 'Dataset', chk: 'Check', kind: 'Layer', mix: 'Combined', op: 'Operation', res: 'Result' }[n[7]];
+      const tag = ROLE[n[3]] ? `<ul><li><span class="tag ${n[3]}">${ROLE[n[3]]}</span>${n[5]}</li></ul>` : '';
+      $('#mm-panel').innerHTML = `<span class="kind">${kind}</span><h2>${n[5]}</h2><p>${n[8]}</p>` + tag +
+        (id ? '' : '<span class="hint">Shapes by stage: circle = dataset or result, square = layer, hexagon = combined, diamond = operation. Point at any shape to follow its path.</span>');
+    }
+    window.flowPanel = () => light(null);
+    $('#mm-d-flow').hidden = true;
+  })();
+
+  /* ---- views */
+  const views = { over: ['#mm-d-over', 'Each circle is a kind of data. The label on each line is the rule applied on the way in. Point at a circle for the datasets and the reason.'],
+                  flow: ['#mm-d-flow', 'For a closer look: every dataset, the rule applied to it, and each operation (buffer, union, intersect, subtract, core patches, area share) on the way to the results. Point at a circle to follow its path.'] };
+  function show(v) {
+    $('#mm-v-over').setAttribute('aria-selected', String(v === 'over')); $('#mm-v-flow').setAttribute('aria-selected', String(v === 'flow'));
+    $('#mm-d-over').hidden = v !== 'over'; $('#mm-d-flow').hidden = v !== 'flow';
+    document.querySelector('#mm .stage').classList.toggle('wide', v === 'flow');
+    $('#mm-lede').textContent = views[v][1];
+    if (v === 'flow') window.flowPanel(); else panel('hub', true);
+  }
+  $('#mm-v-over').addEventListener('click', () => show('over'));
+  $('#mm-v-flow').addEventListener('click', () => show('flow'));
+
+  // ---- checks strip
+  const CK = [
+    ['M6 22 L13 29 L27 9', 'Repeats the published result', 'With the same data, the 2020 map matches Mackey et al. (2024) within about 2 points.'],
+    ['M4 12 C10 6 22 6 28 12 M4 20 C10 14 22 14 28 20 M8 27 H24', 'Datasets agree', 'Datasets that map the same thing are compared place by place.'],
+    ['M13 13 L19 19 M12 16 L16 12 L20 16 L16 20 Z M4 11 L9 6 L13 10 L8 15 Z M19 26 L24 21 L28 25 L23 30 Z', 'New records are real', 'Every ARI logging stand is tested on Landsat and Sentinel-2 images.'],
+    ['M6 28 V8 M26 28 V8 M6 12 H26 M6 18 H26 M6 24 H26', 'Each step is traceable', 'Starting from the published data, each addition is measured on its own, range by range.'],
+  ];
+  $('#mm-checks').innerHTML = CK.map(c => `<div class="ck"><svg viewBox="0 0 32 32" aria-hidden="true"><path class="icon" d="${c[0]}" stroke="${css('--sat')}"/></svg><div><b>${c[1]}</b><span>${c[2]}</span></div></div>`).join('');
+})();
+};
+if (!document.getElementById('method').hidden) window.mmInit();
 </script>

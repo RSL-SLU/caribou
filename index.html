@@ -611,7 +611,7 @@ footer p { max-width: 100ch; }
       <a href="#overview" data-tab="story">Findings</a>
       <a href="#data" data-tab="data">Data</a>
       <a href="#method" data-tab="how">Approach</a>
-      <a class="ext-app" href="https://foresttrace.vercel.app" target="_blank" rel="noopener" title="Open the ForestTRACE web app in a new tab">ForestTRACE ↗</a>
+      <a class="ext-app" href="https://foresttrace.vercel.app" target="_blank" rel="noopener" title="Open the ForestTRACE web app in a new tab">ForestTRACE <svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true" style="vertical-align:-1px"><path d="M4 2.5h5.5V8M9.5 2.5 2.5 9.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
     </nav>
   </header>
 
@@ -634,13 +634,45 @@ footer p { max-width: 100ch; }
       <p class="hero-credits">Caribou: Alain Caron, <a href="https://commons.wikimedia.org/wiki/File:Caribou_forestier_2017_Parc_National_des_Grands_Jardins_47.6833%C2%B0N_70.85%C2%B0W_(269).jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, CC BY-SA 4.0 · Earth: NASA Blue Marble</p>
     </section>
 
+    <!-- ================================================================ QUESTIONS -->
+    <section id="questions" data-tab="research" aria-labelledby="questions-h">
+      <div class="sec-head">
+        <p class="eyebrow">Research questions</p>
+        <h2 id="questions-h">Three questions, three answers</h2>
+      </div>
+      <ol class="qa">
+        <li><span class="qn">Question 1</span><span class="qt">How disturbed are the seven ranges, and how did that change from 2015 to 2025?</span><span class="a" id="qa1"></span><a class="howlink" href="#results">Results →</a></li>
+        <li><span class="qn">Question 2</span><span class="qt">How much of the disturbance is anthropogenic, and how much is wildfire?</span><span class="a" id="qa2"></span><a class="howlink" href="#overview">Status in 2025 →</a></li>
+        <li><span class="qn">Question 3</span><span class="qt">How much do newer public records change the published assessment?</span><span class="a" id="qa3"></span><a class="howlink" href="#compare">Comparison →</a></li>
+      </ol>
+      <p class="qa-check" id="qa-check"></p>
+    </section>
+
+    <!-- ================================================================ BACKGROUND -->
+    <section id="background" data-tab="research" aria-labelledby="background-h">
+      <div class="sec-head">
+        <p class="eyebrow">Scientific basis</p>
+        <h2 id="background-h">Why undisturbed forest matters</h2>
+        <p>Boreal woodland caribou are listed as Threatened in Canada. They persist where large areas of mature forest remain undisturbed. Logging, roads and fire create young forest that supports moose and deer; these sustain more wolves, and caribou calves are lost to the added predation (Environment Canada 2011).</p>
+      </div>
+      <ol class="basis">
+        <li><b>Habitat</b><span>Mature conifer forest and treed wetland, where caribou find lichen and space away from predators. Mapped from Canada’s 2019 land cover, as in Mackey et al. (2024).</span></li>
+        <li><b>500 m buffer zone</b><span>Caribou avoid human features and predation risk is higher near them, so logging, roads, mines and settlements count with a 500 m buffer zone (Environment Canada 2011).</span></li>
+        <li><b>Fire</b><span>Burns count without a buffer zone for up to 40 years while the forest regrows (Environment Canada 2011). Here, fires from 1985 on count in every year.</span></li>
+        <li><b>35% threshold</b><span>A range with more than 35% of its area disturbed has less than a 60% chance of supporting a self-sustaining population (Environment Canada 2011; ECCC 2020).</span></li>
+        <li><b>Core habitat</b><span>Undisturbed habitat, less a 30 m edge, in patches of 100 ha or more.</span></li>
+      </ol>
+      <p class="howlink"><a href="#method">Full method →</a></p>
+    </section>
+
+
     <!-- ================================================================ OVERVIEW -->
     <section id="overview" data-tab="story" aria-labelledby="overview-h">
       <div class="sec-head">
         <p class="eyebrow">Overview</p>
-        <h2 id="overview-h">Every range is past the safe limit</h2>
-        <p>Canada considers a caribou range with <b>more than 35% of its area disturbed</b> unlikely to keep a self-sustaining herd. Logging, roads and wildfire open up the forest and bring in moose, wolves and bears.</p>
+        <h2 id="overview-h">Every range exceeds the 35% threshold</h2>
       </div>
+      <div class="hl" id="hl-overview"></div>
 
       <div class="dash">
         <div class="dash-left">
@@ -661,9 +693,11 @@ footer p { max-width: 100ch; }
             <span class="key"><span class="sw" style="background:#7a5236"></span>Anthropogenic and wildfire</span>
             <span class="key"><span class="sw" style="background:#d9dfd2"></span>Not disturbed</span>
             <span class="key"><span class="sw" style="background:#22a04b"></span>Core habitat</span>
+            <details class="note-fold both-dd"><summary>What does “both” mean?</summary><span>A place counts as both when a fire and a human feature overlap: for example, a burn that lies within 500 m of a road or cutblock, or a stand logged after it burned. It is counted once, as anthropogenic.</span></details>
             <span class="note">Map: where each kind of disturbance is, and the core habitat left in blocks of 100 ha or more. Rings: share of the <span class="basis-label"></span>.</span>
           </figcaption>
         </figure>
+          <p class="basis-note dash-note">Canada considers a caribou range with <b>more than 35% of its area disturbed</b> unlikely to keep a self-sustaining herd. Logging, roads and wildfire open up the forest and bring in moose, wolves and bears.</p>
           <p class="basis-note dash-note"><b>Managed forest, lakes included</b> is the published study’s basis and our default. <b>Whole range</b> is how Environment and Climate Change Canada and Ontario report. <b>Land only</b> leaves out open water, where caribou do not live. See <a href="#compare">how our numbers compare</a>.</p>
         </div>
 
@@ -678,7 +712,7 @@ footer p { max-width: 100ch; }
             <div class="lb-btns" id="basis-water"></div>
           </div>
           <div class="dash-stats">
-            <div class="kstat"><span class="v" id="ks-over">–</span><span class="k">ranges past the 35% limit in 2025</span></div>
+            <div class="kstat"><span class="v" id="ks-over">–</span><span class="k">ranges above the 35% threshold in 2025</span></div>
             <div class="kstat"><span class="v" id="ks-core">–</span><span class="k">core habitat, 2015 → 2025 <small id="ks-core-d"></small></span></div>
             <div class="kstat"><span class="v" id="ks-human">–</span><span class="k">of disturbance is anthropogenic, 2025</span></div>
           </div>
@@ -686,6 +720,7 @@ footer p { max-width: 100ch; }
         </aside>
       </div>
     </section>
+
 
     <!-- ================================================================ DATA CHIPS -->
     <section id="sources" class="slim" data-tab="story" aria-labelledby="sources-h">
@@ -704,11 +739,12 @@ footer p { max-width: 100ch; }
         <p id="results-lede"></p>
         <p class="howlink"><a href="#step-a">How we checked the method →</a></p>
       </div>
+      <div class="hl" id="hl-results"></div>
 
       <figure class="plate">
         <div class="plate-head">
           <span class="plate-title">Share of each range disturbed, 2015–2025</span>
-          <span class="plate-meta">% of <span class="basis-label"></span> · dashed line = 35% limit</span>
+          <span class="plate-meta">% of <span class="basis-label"></span> · dashed line = 35% threshold</span>
         </div>
         <div class="multiples" id="multiples"></div>
       </figure>
@@ -717,7 +753,8 @@ footer p { max-width: 100ch; }
         <div class="block-head">
           <h3>Anthropogenic or wildfire?</h3>
           <p id="cause-lede"></p>
-          <p class="figline-note">The rings and the range card at the top split each range into anthropogenic and wildfire disturbance for any year.</p>
+          <div class="hl" id="hl-cause"></div>
+          <p class="figline-note">The rings and range card at the top show this split for any year.</p>
           <p class="howlink"><a href="#step-c">How we checked the new logging records →</a></p>
         </div>
       </div>
@@ -751,6 +788,7 @@ footer p { max-width: 100ch; }
         <div class="copy">
           <h3>See the change from 2020 to 2025</h3>
           <p id="swipe-copy"></p>
+          <div class="hl hl-sm" id="hl-swipe"></div>
           <p class="howlink"><a href="#step-b">How the records after 2020 were tested →</a></p>
           <div class="tiles" id="swipe-tiles"></div>
           <div class="range-tabs" role="group" aria-label="Choose a range" id="swipe-tabs" style="margin-top:12px"></div>
@@ -791,17 +829,16 @@ footer p { max-width: 100ch; }
         <div>
           <h3>Keep in mind</h3>
           <ul class="plain">
-            <li>Percentages are of each range inside Ontario's managed forest, lakes included, as in the published study.</li>
-            <li>Wildfire counts from 1985 in every year, so every year is measured the same way and no fire is counted in one year and dropped in the next.</li>
-            <li>Logging records end in 2023, so 2024 and 2025 add little new logging; fire is mapped to 2025.</li>
-            <li>Roads never recover: closed roads stay disturbed.</li>
+            <li>Percentages refer to each range within Ontario’s managed forest, lakes included, as in the published study.</li>
+            <li>Logging records end in 2023, so 2024 and 2025 show little new logging. Fire is mapped to 2025.</li>
+            <li>Roads are treated as permanent disturbance, including closed roads.</li>
           </ul>
         </div>
         <div>
           <h3>What comes next</h3>
           <ul class="plain">
-            <li>Planned logging from forest management plans, to show where each range is heading.</li>
-            <li>Yearly updates as new annual reports and fire maps are published.</li>
+            <li>Add planned harvest from forest management plans to project future disturbance.</li>
+            <li>Update the maps each year as new harvest reports and fire maps are released.</li>
           </ul>
         </div>
       </div>
@@ -809,6 +846,7 @@ footer p { max-width: 100ch; }
       <div class="block" id="compare">
         <div class="block-head">
           <h3>How our numbers compare</h3>
+          <div class="hl" id="hl-compare"></div>
           <p>Each source measures a different area. Switch between the managed forest, as in the published study, and the whole range, as in the federal and Ontario reports. Striped bars are figures we measured from that source's own maps or rebuilt with its rules.</p>
         </div>
         <figure class="plate">
@@ -837,23 +875,42 @@ footer p { max-width: 100ch; }
             <li><b>Area.</b> The whole range includes undisturbed northern land outside the managed forest, which lowers the share.</li>
             <li><b>Roads.</b> ECCC's 2020 lines hold far fewer forest roads than Ontario's MNRF road layer, and every road adds a 500&nbsp;m buffer zone.</li>
             <li><b>Logging.</b> ECCC's cutblocks cover more ground than Ontario's records, because their outlines are broader (compare them in the <a href="#data">Data</a> tab).</li>
-            <li><b>Same rules.</b> All sources use a 500&nbsp;m buffer zone around human disturbance, none around fire, and the same 35% limit.</li>
+            <li><b>Same rules.</b> All sources use a 500&nbsp;m buffer zone around human disturbance, none around fire, and the same 35% threshold.</li>
             <li><b>Class 18.</b> Ontario's land cover has a "disturbance" class that mixes cuts and burns. Inside a fire mapped from 1985 on, this study counts it as that fire, without a buffer zone. This lowers the share slightly, most in Berens.</li>
             <li><b>2025.</b> No ECCC map for 2025 was available, so 2025 is shown for this study only.</li>
           </ul>
         </details>
         <ul class="refs">
-          <li>Environment and Climate Change Canada (2020). <i>Amended Recovery Strategy for the Woodland Caribou, Boreal population, in Canada.</i> Section 4.2.1. <a href="https://www.canada.ca/en/environment-climate-change/services/species-risk-public-registry/recovery-strategies/woodland-caribou-boreal-2020.html" target="_blank" rel="noopener">canada.ca</a>. Figures above computed from its 2020 disturbance layers over the federal ranges.</li>
-          <li>Environment Canada (2011). <i>Scientific Assessment to Inform the Identification of Critical Habitat for Woodland Caribou, Boreal Population, in Canada: 2011 Update.</i> <a href="https://www.registrelep-sararegistry.gc.ca/virtual_sara/files/ri_boreal_caribou_science_0811_eng.pdf" target="_blank" rel="noopener">PDF</a></li>
-          <li>Ontario MNRF (2014). <i>Integrated Range Assessments for Woodland Caribou and their Habitat</i>, e.g. <a href="https://files.ontario.ca/environment-and-energy/species-at-risk/Kesagami-Range-EN.pdf" target="_blank" rel="noopener">Kesagami Range 2010</a>; summary in the <a href="https://www.ontario.ca/page/state-woodland-caribou-resource-report-part-2" target="_blank" rel="noopener">State of the Woodland Caribou Resource Report</a>. Whole range, lakes included, young forest under 36 years.</li>
-          <li>Mackey, B. et al. (2024). <i>Land</i> 13, 6. Range inside the managed forest, lakes included.</li>
-          <li>Fryxell, J.M. et al. (2020). Anthropogenic disturbance and population viability of woodland caribou in Ontario. <i>Journal of Wildlife Management.</i> <a href="https://wildlife.onlinelibrary.wiley.com/doi/10.1002/jwmg.21829" target="_blank" rel="noopener">Wiley</a></li>
-        </ul>
+        <li>Environment Canada (2011). <i>Scientific Assessment to Inform the Identification of Critical Habitat for Woodland Caribou (Rangifer tarandus caribou), Boreal Population, in Canada: 2011 Update.</i> Ottawa. <a href="https://www.registrelep-sararegistry.gc.ca/virtual_sara/files/ri_boreal_caribou_science_0811_eng.pdf" target="_blank" rel="noopener">PDF</a></li>
+        <li>Environment and Climate Change Canada (2020). <i>Amended Recovery Strategy for the Woodland Caribou (Rangifer tarandus caribou), Boreal Population, in Canada.</i> Species at Risk Act Recovery Strategy Series. <a href="https://www.canada.ca/en/environment-climate-change/services/species-risk-public-registry/recovery-strategies/woodland-caribou-boreal-2020.html" target="_blank" rel="noopener">canada.ca</a>. ECCC figures are computed from its 2020 disturbance layers.</li>
+        <li>Fryxell, J.M. et al. (2020). Anthropogenic disturbance and population viability of woodland caribou in Ontario. <i>Journal of Wildlife Management</i>. <a href="https://wildlife.onlinelibrary.wiley.com/doi/10.1002/jwmg.21829" target="_blank" rel="noopener">doi:10.1002/jwmg.21829</a></li>
+        <li>Mackey, B. et al. (2024). Assessing the cumulative impacts of forest management on forest age structure development and woodland caribou habitat in boreal landscapes: a case study from two Canadian provinces. <i>Land</i> 13, 6.</li>
+        <li>Ontario Ministry of Natural Resources and Forestry (2014). <i>Integrated Range Assessments for Woodland Caribou and their Habitat</i>, e.g. <a href="https://files.ontario.ca/environment-and-energy/species-at-risk/Kesagami-Range-EN.pdf" target="_blank" rel="noopener">Kesagami Range 2010</a>; summary in the <a href="https://www.ontario.ca/page/state-woodland-caribou-resource-report-part-2" target="_blank" rel="noopener">State of the Woodland Caribou Resource Report</a>.</li>
+      </ul>
       </div>
     </section>
+
+    <!-- ================================================================ REFERENCES -->
+    <section id="references" data-tab="research" aria-labelledby="references-h">
+      <div class="sec-head">
+        <p class="eyebrow">References</p>
+        <h2 id="references-h">Sources cited</h2>
+      </div>
+      <ul class="refs">
+        <li>Environment Canada (2011). <i>Scientific Assessment to Inform the Identification of Critical Habitat for Woodland Caribou (Rangifer tarandus caribou), Boreal Population, in Canada: 2011 Update.</i> Ottawa. <a href="https://www.registrelep-sararegistry.gc.ca/virtual_sara/files/ri_boreal_caribou_science_0811_eng.pdf" target="_blank" rel="noopener">PDF</a></li>
+        <li>Environment and Climate Change Canada (2020). <i>Amended Recovery Strategy for the Woodland Caribou (Rangifer tarandus caribou), Boreal Population, in Canada.</i> Species at Risk Act Recovery Strategy Series. <a href="https://www.canada.ca/en/environment-climate-change/services/species-risk-public-registry/recovery-strategies/woodland-caribou-boreal-2020.html" target="_blank" rel="noopener">canada.ca</a>. ECCC figures are computed from its 2020 disturbance layers.</li>
+        <li>Fryxell, J.M. et al. (2020). Anthropogenic disturbance and population viability of woodland caribou in Ontario. <i>Journal of Wildlife Management</i>. <a href="https://wildlife.onlinelibrary.wiley.com/doi/10.1002/jwmg.21829" target="_blank" rel="noopener">doi:10.1002/jwmg.21829</a></li>
+        <li>Mackey, B. et al. (2024). Assessing the cumulative impacts of forest management on forest age structure development and woodland caribou habitat in boreal landscapes: a case study from two Canadian provinces. <i>Land</i> 13, 6.</li>
+        <li>Ontario Ministry of Natural Resources and Forestry (2014). <i>Integrated Range Assessments for Woodland Caribou and their Habitat</i>, e.g. <a href="https://files.ontario.ca/environment-and-energy/species-at-risk/Kesagami-Range-EN.pdf" target="_blank" rel="noopener">Kesagami Range 2010</a>; summary in the <a href="https://www.ontario.ca/page/state-woodland-caribou-resource-report-part-2" target="_blank" rel="noopener">State of the Woodland Caribou Resource Report</a>.</li>
+      </ul>
+      <p class="figline-note">Data sources and their providers are listed under <a href="#datasets">Datasets</a>.</p>
+      <p class="backlink"><a href="#overview">← Back to the findings</a></p>
+    </section>
+
     <section class="next-band" data-tab="story" aria-label="More">
       <a class="next-card" href="#data"><span class="eyebrow">Data</span><b>Every dataset, and how we checked it</b><span>The years each source covers, whether the datasets agree, a satellite check of the new records, and every dataset by name. →</span></a>
       <a class="next-card" href="#method"><span class="eyebrow">Approach</span><b>How the maps are made</b><span>The processing chain, one window followed step by step, and the published result rebuilt from the same data. →</span></a>
+      <a class="next-card" href="#questions"><span class="eyebrow">Research</span><b>Questions, scientific basis and references</b><span>The three research questions with their answers, why undisturbed forest matters for caribou, and the sources cited. →</span></a>
     </section>
 
     <!-- ================================================================ METHOD -->
@@ -946,26 +1003,26 @@ footer p { max-width: 100ch; }
           </article>
           <article class="step" data-step="1">
             <span class="step-no" data-n="2">Potential habitat</span>
-            <h3>Keep the forest caribou use</h3>
-            <p>Only conifer forest and treed wetland stay in. Everything else is set aside before any disturbance is considered.</p>
+            <h3>Select potential habitat</h3>
+            <p>Only conifer forest and treed wetland count as potential habitat. Other land-cover classes are excluded before disturbance is assessed.</p>
             <p class="figure">Potential habitat: <b data-bind="potential">–</b> of the window</p>
           </article>
           <article class="step" data-step="2">
             <span class="step-no" data-n="3">Disturbance, 2020</span>
-            <h3>Combine every disturbance layer</h3>
-            <p>A pixel counts as disturbed if any dataset touches it: logging since 1980 from FRI or NTEMS harvest, planted stands, roads, mines, towns, farms, corridors and OLCC's disturbance class, each with a 500 m buffer zone, plus wildfire. Overlaps count once.</p>
+            <h3>Combine all disturbance layers</h3>
+            <p>A pixel is disturbed if any dataset maps disturbance there: logging since 1980 from FRI or NTEMS harvest, planted stands, roads, mines, towns, farms, corridors and OLCC's disturbance class, each with a 500 m buffer zone, plus wildfire. Overlaps count once.</p>
             <p class="figure">Disturbed: <b data-bind="disturbed">–</b> of the window</p>
           </article>
           <article class="step" data-step="3">
             <span class="step-no" data-n="4">Undisturbed habitat</span>
-            <h3>Take disturbance away from habitat</h3>
+            <h3>Remove disturbed habitat</h3>
             <p>What remains is potential habitat that no disturbance reaches. In this window, <span data-bind="habLost">–</span> of the potential habitat is lost.</p>
             <p class="figure">Undisturbed habitat: <b data-bind="undisturbed">–</b> of the window</p>
           </article>
           <article class="step" data-step="4">
             <span class="step-no" data-n="5">Core habitat</span>
-            <h3>Strip the edges, size the patches</h3>
-            <p>A one-pixel edge is removed, touching pixels are joined into patches and each patch is measured. Patches under 100 ha are too small to count; the rest are grouped at 500, 1,000 and 10,000 ha.</p>
+            <h3>Identify core habitat</h3>
+            <p>A 30 m edge is removed and adjacent pixels are grouped into patches. Patches under 100 ha are excluded; the rest are grouped at 500, 1,000 and 10,000 ha.</p>
             <p class="figure">Core habitat: <b data-bind="core">–</b> of the window · <b data-bind="coreLarge">–</b> of it in patches over 1,000 ha</p>
           </article>
         </div>
@@ -998,8 +1055,8 @@ footer p { max-width: 100ch; }
         <summary>Technical details</summary>
         <p><b>Reproduction.</b> Same inputs as the study: 17 Forest Resources Inventory packages, the national Landsat harvest layer 1985–2020, MNRF and national road networks, the Ontario Land Cover Compilation (classes 18, 25, 27, 28), and the National Fire Database 1985–2018. We checked our map pixel by pixel against the layers the authors shared. The remaining 1 to 3 points come mostly from roads, which are only published as current editions.</p>
         <p><b>Overlap.</b> On the 30 m grid inside each range's managed forest, every dataset's mapped area is split into the part also mapped by all the other datasets of the same type, by some of them, or by none. Another dataset counts as mapping a pixel when it maps something within 60 m, so that polygon edges, Landsat pixels and road centre lines drawn slightly apart still match. Comparisons that include ECCC 2020 are limited to the federal range, where ECCC maps.</p>
-        <p><b>Rules for the 2015–2025 maps.</b> Fire counts from 1985 in every year (NFDB and NBAC). ARI logging from 2013 on is used only where at least half of a stand shows a clear drop in the forest signal on Landsat or Sentinel-2; 2,609 stands (40,946 ha) without a visible cut are left out. OLCC's disturbance class (18) mixes cuts and burns, so where NFDB or NBAC maps a fire from 1985 on it is counted as fire (no 500 m buffer zone); everywhere else it stays anthropogenic, as in the published study.</p>
-        <p><b>Satellite check.</b> Random spots inside ARI records: about 400 per record type on Landsat (logging only where FRI and NTEMS have none) and 190 to 350 per type on Sentinel-2, with cloud-free summer images from two years before to three years after the recorded year (Landsat 8/9 for 2013–2020, Sentinel-2 for 2018–2024). A spot shows forest loss if its Normalized Burn Ratio falls by more than 0.1 at some point in that six-year window, so cuts recorded a year or two early or late still count. Logging recorded by both FRI and NTEMS harvest is checked the same way as a reference: 94% of it shows loss, and the rest is mostly partial cuts, cuts smaller than a pixel, or stands already open. The full check then tested every ARI logging stand from 2013 on over its whole area, with Landsat and, from 2018, Sentinel-2. Blowdown and drought records are left out because Canada's caribou method counts only human disturbance and fire.</p>
+        <p><b>Rules for the 2015–2025 maps.</b> Fire counts from 1985 in every year (NFDB and NBAC). ARI logging from 2013 on is used only where at least half of a stand shows a clear drop in the forest signal on Landsat or Sentinel-2; 2,609 stands (40,946 ha) without a visible cut are excluded. OLCC's disturbance class (18) mixes cuts and burns, so where NFDB or NBAC maps a fire from 1985 on it is counted as fire (no 500 m buffer zone); everywhere else it stays anthropogenic, as in the published study.</p>
+        <p><b>Satellite check.</b> Random spots inside ARI records: about 400 per record type on Landsat (logging only where FRI and NTEMS have none) and 190 to 350 per type on Sentinel-2, with cloud-free summer images from two years before to three years after the recorded year (Landsat 8/9 for 2013–2020, Sentinel-2 for 2018–2024). A spot shows forest loss if its Normalized Burn Ratio falls by more than 0.1 at some point in that six-year window, so cuts recorded a year or two early or late still count. Logging recorded by both FRI and NTEMS harvest is checked the same way as a reference: 94% of it shows loss, and the rest is mostly partial cuts, cuts smaller than a pixel, or stands already open. The full check then tested every ARI logging stand from 2013 on over its whole area, with Landsat and, from 2018, Sentinel-2. Blowdown and drought records are excluded because Canada's caribou method counts only human disturbance and fire.</p>
         <p id="flag-note"></p>
         <p>Code and notebooks: <a href="https://github.com/RSL-SLU/caribou" target="_blank" rel="noopener">github.com/RSL-SLU/caribou</a></p>
       </details>
@@ -1026,30 +1083,23 @@ footer p { max-width: 100ch; }
         </figcaption>
       </figure>
 
-      <div class="block side-b" id="step-b">
+      <div class="block" id="step-b">
         <div class="block-head">
-          <p class="eyebrow">Check 1 · do the datasets agree?</p>
-          <h3 id="align-h">Datasets that map the same kind of disturbance agree with each other</h3>
-          <p id="align-lede"></p>
-          <p class="figline-note">The explorer below shows, range by range, how much of each dataset the others also map. Hover a dataset there for each pair.</p>
+          <p class="eyebrow">Check 1 · Agreement between datasets</p>
+          <h3 id="align-h">Datasets that map the same disturbance agree</h3>
+          <p>For each disturbance type, datasets were compared pixel by pixel on the 30 m grid, with a 60 m tolerance. Each card gives the share of one dataset that the others also map.</p>
         </div>
-        <div class="side-right">
-          <p class="side-note" id="ov-extra"></p>
-        </div>
+        <ol class="basis agree" id="agree-cards"></ol>
       </div>
-
 
       <div class="block split mapwide" id="explore">
         <div class="copy">
-          <h3>Explore each dataset, range by range</h3>
-          <p>Pick a range and a kind of disturbance, then switch datasets on and off. Each dataset has its own colour; where two or more map the same place, it turns green. Hover the map to see which datasets are there.</p>
-          <p class="dx-note"><span class="role-pill used" style="margin-left:0">used</span> goes into the habitat maps · <span class="role-pill check">check only</span> is compared with them but not counted.</p>
+          <h3>Agreement by range</h3>
+          <p>Switch datasets on or off. Places mapped by two or more are green.</p>
           <div class="range-tabs" role="group" aria-label="Choose a range" id="dx-tabs"></div>
           <div class="lb-btns" id="dx-type" role="group" aria-label="Disturbance type" style="margin-top:12px"></div>
           <div class="lb-btns" id="dx-window" role="group" aria-label="Years" style="margin-top:8px"></div>
           <div class="dx-list" id="dx-list" role="group" aria-label="Datasets"></div>
-          <p class="dx-note" id="dx-note"></p>
-          <p class="dx-note">"Mostly unique" is not a fault: a more complete dataset, such as MNRF roads with its forest roads, maps much that the others miss.</p>
         </div>
         <figure class="plate">
           <div class="plate-head">
@@ -1064,6 +1114,13 @@ footer p { max-width: 100ch; }
             <svg aria-hidden="true"></svg>
           </div>
           <figcaption class="plate-foot" id="dx-legend"></figcaption>
+          <div class="plate-foot dx-notes">
+            <details class="note-fold" id="dx-more"><summary>Notes</summary>
+              <p class="dx-note"><span class="role-pill used" style="margin-left:0">used</span> goes into the habitat maps · <span class="role-pill check">check only</span> is compared with them but not counted.</p>
+              <p class="dx-note" id="dx-note"></p>
+              <p class="dx-note">A high “mostly unique” share can reflect a more complete dataset, such as MNRF roads with its forest roads.</p>
+            </details>
+          </div>
         </figure>
       </div>
 
@@ -1073,24 +1130,24 @@ footer p { max-width: 100ch; }
           <h3>Checking ARI against Landsat and Sentinel-2 images</h3>
           <p id="real-lede"></p>
           <ol class="howc">
-            <li><b>Why.</b> ARI is the only logging record after 2020, and some of its logging appears in no other dataset (Check 1). Before adding it, we check that the cuts it records are visible on the ground.</li>
-            <li><b>Pick spots.</b> Random spots inside ARI records, for each record type: about 400 per type checked with Landsat (2013–2020; logging only where FRI and NTEMS have none), and 190 to 350 per type with Sentinel-2 (2018–2024).</li>
-            <li><b>Look every summer.</b> Cloud-free summer images from two years before to three years after the year ARI gives: Landsat 8/9 for 2013–2020, Sentinel-2 for 2018–2024.</li>
-            <li><b>Measure the forest.</b> From each image, the Normalized Burn Ratio (NBR): high over closed forest, and it falls sharply when trees are cut or burned.</li>
-            <li><b>Decide.</b> If NBR falls by more than 0.1 at any point in those six summers, the record is confirmed. A cut recorded a year early or late still counts.</li>
-            <li><b>Compare.</b> Logging that FRI and NTEMS harvest both record is checked the same way. It shows what real logging scores on this test (grey bar).</li>
-            <li><b>Then every stand.</b> All 16,369 ARI logging stands from 2013 on were tested the same way over their whole area. A stand stays in the maps if at least half of its pixels show loss: 13,760 are kept.</li>
+            <li><b>Purpose.</b> ARI is the only logging record after 2020, and part of it is in no other dataset (Check 1). Each recorded cut should be visible from space.</li>
+            <li><b>Sample.</b> Random points inside ARI records, per record type: about 400 with Landsat (2013–2020; logging absent from FRI and NTEMS only) and 190–350 with Sentinel-2 (2018–2024).</li>
+            <li><b>Imagery.</b> Cloud-free summer composites from two years before to three years after the year of record.</li>
+            <li><b>Measure.</b> Normalized Burn Ratio (NBR): high over closed forest, it falls sharply when trees are cut or burned.</li>
+            <li><b>Rule.</b> A record shows loss if NBR falls by more than 0.1 between any two of these summers, so a cut dated a year early or late still counts.</li>
+            <li><b>Reference.</b> Logging recorded by both FRI and NTEMS harvest is tested the same way (grey bar).</li>
+            <li><b>Full test.</b> All 16,369 ARI logging stands from 2013 on were tested over their whole area. A stand is retained if at least half of its pixels show loss: 13,760 are retained.</li>
           </ol>
           <p class="figline-note">NBAC fire is not tested here: it is itself mapped from satellite images, so the test would confirm it by construction. Check 1 shows it matches the NFDB and ARI fire records instead.</p>
         </div>
         <figure class="plate">
           <div class="plate-head">
-            <span class="plate-title">1,990 sampled spots: share showing clear forest loss</span>
+            <span class="plate-title">Point test on 1,990 sampled records: share showing forest loss</span>
             <div class="lb-btns" id="rate-sensor" role="group" aria-label="Period"></div>
           </div>
           <div class="chart" id="chart-rates"></div>
           <figcaption class="plate-foot">
-            <span class="key"><span class="sw" style="background:#a2a79a"></span>Grey: logging FRI and NTEMS harvest both record, for reference</span>
+            <span class="key"><span class="sw" style="background:#a2a79a"></span>Grey: reference logging recorded by both FRI and NTEMS harvest</span>
             <span class="note">Hover a bar for the details.</span>
           </figcaption>
         </figure>
@@ -1098,18 +1155,17 @@ footer p { max-width: 100ch; }
 
       <div class="block split mapwide">
         <div class="copy">
-          <h3>Click a shape to see what the satellite saw</h3>
-          <p><b>Spots checked</b> shows the random sample of 1,990 spots: point at or click one for its forest signal, double-click to zoom in and play the summers around its record. <b>All ARI logging stands</b> shows every stand recorded from 2013 to 2023 and whether the full satellite check kept it in the maps. Most stands are only a few hectares, so outlines are drawn thicker until you zoom in.</p>
+          <h3>Satellite evidence for each record</h3>
           <div class="lb-btns" id="pt-view" role="group" aria-label="What to show" style="margin-bottom:10px"></div>
           <div class="lb-btns" id="pt-group" role="group" aria-label="Record type"></div>
           <div class="range-tabs" role="group" aria-label="Choose a range" id="pt-tabs" style="margin-top:10px"></div>
           <div class="pt-panel" id="pt-panel"></div>
+          <p class="figline-note" style="margin-top:12px"><b>Sampled records</b>: ARI records drawn at random for a point test, shown by range and record type; filled where loss is detected. <b>All ARI logging stands</b>: every logging stand recorded from 2013 to 2023, filled where the full-stand test retains it. Hover a shape for its forest signal; double-click to play its summers.</p>
         </div>
         <figure class="plate">
           <div class="plate-head">
             <span class="plate-title" id="pt-title"></span>
             <span class="plate-meta" id="pt-meta"></span>
-            <span class="plate-meta">scroll to zoom · drag to pan</span>
             <div class="lb-btns" id="pt-base" role="group" aria-label="Base map"></div>
             <button type="button" class="zoomout" id="pt-zoomout" hidden>Zoom out</button>
           </div>
@@ -1144,7 +1200,7 @@ footer p { max-width: 100ch; }
           <tbody>
               <tr><td><b>Ranges</b></td><td>Woodland caribou range boundaries<br><small>Land Information Ontario</small></td><td>current</td><td>polygons</td><td>The seven ranges analysed</td><td><span class="role study">Published study</span></td></tr>
               <tr><td><b>FMU</b></td><td>Forest Management Units<br><small>Land Information Ontario</small></td><td>2025</td><td>polygons</td><td>The managed forest; every percentage is of the range inside it</td><td><span class="role study">Published study</span></td></tr>
-              <tr><td><b>VLCE2</b></td><td>Canada forest land cover 2019 (Virtual Land Cover Engine)<br><small>Natural Resources Canada</small></td><td>2019</td><td>30 m raster</td><td>Where caribou can live: conifer forest and treed wetland</td><td><span class="role study">Published study</span></td></tr>
+              <tr><td><b>VLCE2</b></td><td>Canada forest land cover 2019 (Virtual Land Cover Engine)<br><small>Natural Resources Canada</small></td><td>2019</td><td>30 m raster</td><td>Potential caribou habitat: conifer forest and treed wetland</td><td><span class="role study">Published study</span></td></tr>
               <tr><td><b>FRI</b></td><td>Forest Resources Inventory, Packaged Products v2 (17 management units)<br><small>Ontario MNRF</small></td><td>logging 1980 to each inventory year</td><td>polygons</td><td>Logging and planted stands; unclassified corridors</td><td><span class="role study">Published study</span></td></tr>
               <tr><td><b>NTEMS harvest</b></td><td>Landsat-derived forest harvest 1985–2020 (Hermosilla et al.)<br><small>Natural Resources Canada</small></td><td>1985–2020</td><td>30 m raster</td><td>Logging; its year is used where FRI and NTEMS harvest both record logging</td><td><span class="role study">Published study</span></td></tr>
               <tr><td><b>MNRF roads</b></td><td>MNRF Road Segments<br><small>Land Information Ontario</small></td><td>by year built, to 2025</td><td>lines</td><td>Roads, 500 m buffer zone</td><td><span class="role study">Published study</span></td></tr>
@@ -1311,6 +1367,22 @@ footer p { max-width: 100ch; }
   .dx-row[aria-pressed="false"] { opacity: .45; }
   .dx-row .sw { width: 14px; height: 14px; border-radius: 3px; }
   .dx-row b { font-family: var(--f-mono); font-size: .86rem; }
+  #explore .dx-row { padding-block: 7px; }
+  #explore .dx-list { gap: 6px; }
+  .dx-notes { display: grid; gap: 4px; padding-top: 0; }
+  .dx-notes .dx-note { margin: 0; color: #4b5046; }
+  .dx-notes .dx-note:empty { display: none; }
+  details.note-fold { font-size: .8rem; line-height: 1.45; flex-basis: 100%; }
+  details.note-fold > summary { cursor: pointer; width: max-content; font: 500 .7rem var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: #6c7166; list-style: none; }
+  details.note-fold > summary::-webkit-details-marker { display: none; }
+  details.note-fold > summary::before { content: '+ '; }
+  details.note-fold[open] > summary::before { content: '− '; }
+  details.note-fold > :not(summary) { display: block; margin: 4px 0 0; font-size: .8rem; opacity: 1; }
+  section:not(.hero) > details.note-fold > summary, .block-head details.note-fold > summary, .copy details.note-fold > summary { color: var(--ink-3); }
+  .dx-more { font-size: .78rem; color: #4b5046; }
+  .dx-more summary { cursor: pointer; font: 500 .72rem var(--f-mono); letter-spacing: .04em; color: #6c7166; }
+  .dx-more .dx-note { font-size: .78rem; margin-top: 4px; }
+  .dx-more[hidden] { display: none; }
   .dx-row .ha { font-family: var(--f-mono); font-size: .78rem; color: var(--ink-3); }
   .dx-row .fit { grid-column: 2 / -1; display: flex; align-items: center; gap: 8px; font-size: .8rem; color: var(--ink-2); }
   .dx-row .fit i { flex: 1; height: 6px; border-radius: 3px; background: var(--line); position: relative; overflow: hidden; }
@@ -1345,6 +1417,39 @@ footer p { max-width: 100ch; }
   .block-head .howlink, .copy .howlink { margin-top: 8px; }
   .backlink { margin: 36px 0 0; font-family: var(--f-mono); font-size: .85rem; }
   .next-band { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px; }
+  ol.qa { list-style: none; counter-reset: q; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 16px; }
+  ol.qa li { counter-increment: q; display: grid; gap: 10px; align-content: start; padding: 22px 24px; border: 1px solid var(--line-2); border-radius: 14px; background: var(--surface); }
+  ol.qa .qt { display: block; font: 600 1.05rem/1.35 var(--f-display); color: var(--ink); }
+  ol.qa .qn { font: 600 .72rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+  ol.qa .a { color: var(--ink-2); font-size: .98rem; line-height: 1.55; }
+  ol.qa .a b { color: var(--ink); }
+  ol.qa .howlink { font-size: .85rem; }
+  /* magazine text: justified with hyphenation in the Findings and Research tabs */
+  section[data-tab="story"] .sec-head > p:not(.eyebrow), section[data-tab="research"] .sec-head > p:not(.eyebrow),
+  section[data-tab="story"] .block-head > p, section[data-tab="story"] .copy > p, ol.qa .a, .qa-check, ol.basis span,
+  ul.meaning > li, section[data-tab="story"] ul.plain li, #compare details.how li { text-align: justify; hyphens: auto; -webkit-hyphens: auto; text-wrap: pretty; }
+  #background .sec-head > p:not(.eyebrow)::first-letter { float: left; font: 700 3.4em/.82 var(--f-display); font-stretch: 85%; margin: 6px 10px 0 0; color: var(--accent); }
+  .qa-check { margin: 16px 0 0; color: var(--ink-2); font-size: .95rem; max-width: 80ch; }
+  .qa-check b { color: var(--ink); }
+  ol.basis { list-style: none; padding: 0; margin: 18px 0 8px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 14px; }
+  ol.basis.agree { grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+  ol.basis li { display: grid; gap: 6px; align-content: start; padding: 16px 18px; border-top: 3px solid var(--accent); background: var(--surface); border-radius: 0 0 10px 10px; }
+  ol.basis b { font: 700 1rem var(--f-display); color: var(--ink); }
+  ol.basis span { color: var(--ink-2); font-size: .93rem; line-height: 1.5; }
+  ol.basis em.big { font: 700 2rem/1 var(--f-display); font-stretch: 85%; font-style: normal; color: var(--accent); }
+  main > section#research-link { padding-block: 18px 6px; }
+  .research-btn { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; padding: 14px 20px; border: 1px solid var(--line-2); border-radius: 12px; background: var(--surface); color: var(--ink); text-decoration: none; transition: border-color .15s; }
+  .research-btn:hover { border-color: var(--accent); }
+  .research-btn b { font: 600 1rem var(--f-display); }
+  .research-btn > span:last-child { margin-left: auto; color: var(--accent); }
+  .hl { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 12px; margin: 18px 0 22px; }
+  .hl.hl-sm { grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); margin: 12px 0; }
+  .hl .hc { display: grid; gap: 2px; padding: 12px 16px; border-left: 3px solid var(--accent); background: var(--surface); border-radius: 0 10px 10px 0; }
+  .hl .hc.warm { border-left-color: #eb6834; }
+  .hl .hc.cool { border-left-color: #8fb3cf; }
+  .hl .hv { font: 700 1.7rem/1.05 var(--f-display); font-stretch: 85%; color: var(--ink); }
+  .hl .hk { font-size: .88rem; color: var(--ink-2); line-height: 1.35; }
+  .hl .hk b { color: var(--ink); }
   .next-card { display: grid; gap: 6px; align-content: start; padding: 22px 24px; border: 1px solid var(--line-2); border-radius: 14px; background: var(--surface); color: var(--ink); text-decoration: none; transition: border-color .15s, transform .15s; }
   .next-card:hover { border-color: var(--accent); transform: translateY(-2px); }
   .next-card b { font-family: var(--f-display); font-size: 1.25rem; font-stretch: 85%; }
@@ -1422,6 +1527,7 @@ footer p { max-width: 100ch; }
   .sv-bar .tr i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 2px; }
   .sv-bar .tr b { position: absolute; left: 50%; top: -3px; bottom: -3px; border-left: 2px dashed #171a14; }
   .sv-bar span:last-child { font-family: var(--f-mono); font-weight: 700; text-align: right; }
+  .sv-bar, .sv-bar span { color: #171a14; }
   #map-pt svg:not(.base-hab) g.pt .shape { filter: drop-shadow(0 0 1.5px rgba(0, 0, 0, .95)); }
   #map-pt svg.zoomed { cursor: grab; }
   #map-pt svg.panning { cursor: grabbing; }
@@ -1658,6 +1764,16 @@ footer p { max-width: 100ch; }
   ul.pointlist li b { display: block; color: var(--ink); font-family: var(--f-display); font-size: .98rem; margin-bottom: 1px; }
   /* text beside a figure: figure centred vertically on the text */
   .split, .split.mapwide, .side-a, .side-b, .explorer { align-items: center !important; }
+  /* the checked-spots map must not move while the panel beside it changes on hover */
+  .split.mapwide:has(#map-pt), .split.mapwide:has(#map-dx) { align-items: start !important; }
+  #pt-panel .tc-tag { display: block; min-height: 1.1em; }
+  #pt-panel .tc-sub { min-height: 2.8em; }
+  #pt-panel .tc-svg { display: block; margin-top: 4px; }
+  #pt-panel .tc-zone { font: 600 9.5px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; }
+  #pt-panel .tc-badge { font: 700 10.5px var(--f-mono); fill: #fff; }
+  #map-pt { scroll-margin-top: 80px; }
+  .split.mapwide:has(#map-pt) .plate-head { min-height: 48px; flex-wrap: nowrap; }
+  .split.mapwide:has(#map-pt) .plate-head .plate-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
   .side-b > .block-head { position: static !important; }
   .scrolly { align-items: start !important; }
   /* ---------- hero: caribou photo left, satellite globe right ---------- */
@@ -1674,6 +1790,7 @@ footer p { max-width: 100ch; }
   /* summary band, citation */
   /* stat tiles: values always fit inside the tile */
   .tiles { grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)) !important; }
+  #swipe-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   .tiles .tile { min-width: 0; padding: 12px 12px; }
   .tiles .v { white-space: normal !important; font-size: clamp(.95rem, 1.25vw, 1.08rem) !important; line-height: 1.2; overflow-wrap: anywhere; }
   .dash-basis .basis-note.in-panel { flex-basis: 100%; margin: 4px 0 0; font-size: .8rem; line-height: 1.5; color: var(--ink-3); opacity: 1; max-width: none; }
@@ -1923,7 +2040,7 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
     $('#ks-core').textContent = signed((T.core[last] / T.core[0] - 1) * 100, 0) + '%';
     $('#ks-core-d').textContent = fmt(T.core[0] / 1e6, 2) + ' → ' + fmt(T.core[last] / 1e6, 2) + ' million ha';
     $('#ks-human').textContent = fmt(100 * humanShare(last), 0) + '%';
-    $('#overview-h').textContent = over.length === 7 ? 'Every range is past the safe limit' : over.length + ' of the seven ranges are past the safe limit';
+    $('#overview-h').textContent = over.length === 7 ? 'Every range exceeds the 35% threshold' : over.length + ' of the seven ranges exceed the 35% threshold';
   }
   btnGroup('#basis-area', [['managed', 'Managed forest'], ['whole', 'Whole range']], basisArea, v => { basisArea = v; updateBasis(); });
   btnGroup('#basis-water', [['water', 'Lakes included'], ['land', 'Land only']], basisWater, v => { basisWater = v; updateBasis(); });
@@ -2023,13 +2140,13 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
   /* ---------- data sources timeline ---------- */
   const SRC = [
     ['Ranges · FMU', 'Caribou ranges and Forest Management Units · Land Information Ontario', 'paper', 2025, 2025, 'Where the analysis runs: each range inside the managed forest.'],
-    ['VLCE2', 'Forest land cover 2019 · NRCan', 'paper', 2019, 2019, 'Where caribou can live: conifer forest and treed wetland, 30 m.'],
+    ['VLCE2', 'Forest land cover 2019 · NRCan', 'paper', 2019, 2019, 'Potential caribou habitat: conifer forest and treed wetland, 30 m.'],
     ['FRI', 'Forest Resources Inventory · Ontario MNRF', 'paper', 1980, 2013, 'Logged and planted stands in the 17 inventory packages the study used, made 2007–2015. The last logging any package records is 2013; almost none is after 2010.'],
     ['NTEMS harvest', 'Landsat forest harvest · NRCan', 'paper', 1985, 2020, 'Logging seen by Landsat, 30 m. Its year is used where FRI and NTEMS both record logging.'],
     ['MNRF roads · NRN', 'Road segments · Ontario MNRF; National Road Network · Statistics Canada', 'paper', 1980, 2025, 'Roads, entered in the year they were built (MNRF dates roads up to 2025).'],
     ['OLCC', 'Ontario Land Cover Compilation v2 · Ontario MNRF', 'paper', 2000, 2011, 'Mines, towns, farms and land-cover disturbance.'],
     ['NFDB', 'National Fire Database · NRCan', 'paper', 1985, 2024, 'Fire perimeters.'],
-    ['ARI', 'Analysis Ready Inventory 2025 · Ontario MNRF', 'added', 1980, 2023, 'Ontario’s annual logging reports. Fills logging the other sources miss, and is the only logging record after 2020 (to 2023). From 2013 on, only stands seen from space are kept.'],
+    ['ARI', 'Analysis Ready Inventory 2025 · Ontario MNRF', 'added', 1980, 2023, 'Ontario’s annual logging reports. Fills logging the other sources miss, and is the only logging record after 2020 (to 2023). From 2013 on, only stands confirmed by satellite imagery are retained.'],
     ['NBAC', 'National Burned Area Composite · NRCan', 'added', 1980, 2025, 'Burned area mapped from satellite; the only source for 2025 fires. Fires count from 1985.'],
     ['NTEMS harvest 2022', 'Landsat forest harvest, 2022 edition · NRCan', 'check', 2021, 2022, 'Used to check ARI after 2020.'],
     ['ECCC 2020', 'Anthropogenic disturbance 2020 · Environment and Climate Change Canada', 'check', 2020, 2020, 'Federal map of roads, cutblocks, settlements and mines; used to check roads and footprint.'],
@@ -2075,12 +2192,11 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
   function resultsLede() {
     const allYears = RANGES.every(r => S.series[r].dist.every(v => v > 35));
     const up = RANGES.filter(r => S.series[r].dist[last] > S.series[r].dist[i20] + 0.5);
-    $('#results-lede').textContent = (allYears ? 'All seven ranges are above the 35% limit in every year from 2015 to 2025. ' : RANGES.filter(r => S.series[r].dist[last] > 35).length + ' of the seven ranges are above the 35% limit in 2025. ') + 'Between 2020 and 2025 the disturbed share grew in ' + (up.length === RANGES.length ? 'all seven' : up.length + ' of them') +
-      ', and core habitat across the seven fell from ' + fmt(T.core[0] / 1e6, 2) + ' million ha in 2015 to ' + fmt(T.core[last] / 1e6, 2) + ' million ha in 2025.';
+    $('#results-lede').textContent = 'Between 2020 and 2025 the disturbed share rose in ' + (up.length === RANGES.length ? 'all seven ranges' : up.length + ' of the seven ranges') + '. Core habitat fell from ' + fmt(T.core[0] / 1e6, 2) + ' million ha in 2015 to ' + fmt(T.core[last] / 1e6, 2) + ' million ha in 2025.';
     const hOver = RANGES.filter(r => HV[r].human[last] > 35);
     const fireLed = RANGES.filter(r => HV[r].fire_only[last] > HV[r].human[last]);
-    $('#cause-lede').textContent = 'In 2025, ' + fmt(100 * humanShare(last), 0) + '% of the disturbed area was anthropogenic. Anthropogenic disturbance alone puts ' +
-      (hOver.length === RANGES.length ? 'every range' : hOver.length + ' of the seven') + ' past the 35% limit' + (fireLed.length ? '; wildfire leads only in ' + listing(fireLed) : '') + '.';
+    $('#cause-lede').textContent = 'In 2025, ' + fmt(100 * humanShare(last), 0) + '% of the disturbed area was anthropogenic. Anthropogenic disturbance alone places ' +
+      (hOver.length === RANGES.length ? 'every range' : hOver.length + ' of the 7 ranges') + ' above the 35% threshold' + (fireLed.length ? '; wildfire leads only in ' + listing(fireLed) : '') + '.';
   }
   function renderMultiples() {
     const host = $('#multiples');
@@ -2136,7 +2252,7 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
       hover(g, () => '<b>' + r + ', ' + causeYear + '</b><br>Anthropogenic <span class="m">' + fmt(hu, 1) + '%</span> of the range<br>Wildfire only <span class="m">' + fmt(fo, 1) + '%</span><br><span class="s">' + risk(hu + fo) + ' risk</span>');
     });
     el('line', { x1: x(35), x2: x(35), y1: m.t - 8, y2: H - m.b + 2, stroke: '#171a14', 'stroke-width': 1.2, 'stroke-dasharray': '4 3' }, svg);
-    txt(svg, { x: x(35) + 4, y: m.t - 8, class: 'band-name' }, '35% LIMIT');
+    txt(svg, { x: x(35) + 4, y: m.t - 8, class: 'band-name' }, '35% THRESHOLD');
     $('#cause-title').textContent = 'What disturbs each range, ' + causeYear;
     $('#cause-year-lab').textContent = causeYear;
   }
@@ -2157,10 +2273,10 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
   const RAMP = ['#5cb96b', '#31a354', '#1a7539', '#0b5227', '#00330f'];
   const CLASS_LABELS = ['Under 100 ha', '100–500 ha', '500–1,000 ha', '1,000–10,000 ha', 'Over 10,000 ha'];
   const LAYERS = {
-    origin2025: ['Anthropogenic or wildfire, 2025', () => kk(PEOPLE, 'Anthropogenic') + kk(FIRE, 'Wildfire') + kk(BOTH, 'Both') + kk(CORE, 'Core habitat')],
+    origin2025: ['Anthropogenic or wildfire, 2025', () => kk(PEOPLE, 'Anthropogenic') + kk(FIRE, 'Wildfire') + kk(BOTH, 'Both') + kk(CORE, 'Core habitat') + '<details class="note-fold both-dd"><summary>What does “both” mean?</summary><span>A place counts as both when a fire and a human feature overlap: for example, a burn that lies within 500 m of a road or cutblock, or a stand logged after it burned. It is counted once, as anthropogenic.</span></details>'],
     disturbance2025: ['Disturbed, 2025', () => kk(grad(DIST), 'Disturbed') + kk('#bfd0d7', 'Water')],
     core2025: ['Core habitat, 2025', () => RAMP.slice(1).map((c, i) => kk(c, CLASS_LABELS[i + 1])).join('')],
-    potential: ['Forest caribou can use', () => kk(grad('#6fae78'), 'Conifer forest and treed wetland') + kk('#bfd0d7', 'Water')],
+    potential: ['Potential habitat', () => kk(grad('#6fae78'), 'Conifer forest and treed wetland') + kk('#bfd0d7', 'Water')],
   };
   let exRange = 'Berens', exLayer = 'origin2025';
   function showEx() {
@@ -2169,7 +2285,7 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
     $('#ex-img').src = e.images[exLayer];
     $('#ex-img').alt = exRange + ': ' + LAYERS[exLayer][0];
     $('#ex-title').textContent = exRange;
-    $('#ex-legend').innerHTML = LAYERS[exLayer][1]() + '<span class="note">Dashed line: part of the range inside the managed forest.</span>';
+    $('#ex-legend').innerHTML = LAYERS[exLayer][1]() + '<span class="note">Dashed line: managed-forest boundary.</span>';
     $('#rc-name').textContent = exRange;
     $('#rc-desc').textContent = DESC[exRange];
     $$('#rc-locator path').forEach(p => p.classList.toggle('on', p.dataset.range === exRange));
@@ -2183,7 +2299,7 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
       ['olcc', 'Mines, towns, farms', '#2a78d6', 'OLCC'], ['fri_ucl', 'Corridors', '#e87ba4', 'FRI'], ['fire', 'Wildfire', '#eb6834', 'NFDB · NBAC']];
     const ty = S.series[exRange].types, li = ty.harvest.length - 1;
     const rows = TY.map(x => [x[1] + '<small class="sb-src">' + x[3] + '</small>', ty[x[0]][li], x[2], fmt(ty[x[0]][li], 1) + '%']).filter(r => r[1] >= 0.05).sort((a, b) => b[1] - a[1]);
-    sideBars($('#rc-types'), 'What disturbs it, 2025', rows, Math.max(...rows.map(r => r[1])), 'Share of the range inside the managed forest; where layers overlap, each place counts once. Small print: the datasets each one comes from (see the Data tab).');
+    sideBars($('#rc-types'), 'What disturbs it, 2025', rows, Math.max(...rows.map(r => r[1])), 'Share of the range inside the managed forest; overlapping layers count once. Source datasets are listed under each class.');
   }
   rangeTabs('#range-tabs', exRange, r => { exRange = r; showEx(); });
   btnGroup('#lb-layers', Object.entries(LAYERS).map(([k, v]) => [k, v[0]]), exLayer, id => { exLayer = id; showEx(); });
@@ -2213,9 +2329,15 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
     $('#swipe-title').textContent = swRange + ' · ' + L[0] + ', 2020 and 2025';
     $('#swipe-legend').innerHTML = L[3]();
     const fo = HV[swRange].fire_only;
-    $('#swipe-tiles').innerHTML = [['Disturbed', fmt(s.dist[i20], 0) + '% → ' + fmt(s.dist[last], 0) + '%'], ['Core habitat', signed((s.core[last] / s.core[i20] - 1) * 100, 0) + '%'],
-      ['Wildfire only', fmt(fo[i20], 1) + '% → ' + fmt(fo[last], 1) + '%']].map(x => '<div class="tile"><span class="k">' + x[0] + '</span><span class="v">' + x[1] + '</span><span class="d">2020 → 2025</span></div>').join('');
-    $('#swipe-copy').textContent = 'In ' + swRange + ', the disturbed share went from ' + fmt(s.dist[i20], 0) + '% in 2020 to ' + fmt(s.dist[last], 0) + '% in 2025, and core habitat ' + ((s.core[last] < s.core[i20]) ? 'fell' : 'grew') + ' by ' + fmt(Math.abs((s.core[last] / s.core[i20] - 1) * 100), 0) + '%.';
+    // disturbed = anthropogenic + wildfire only, so the parts are shown so that they add up after rounding
+    const r1 = v => Math.round(v * 10) / 10, dd = r1(s.dist[last] - s.dist[i20]), df = r1(fo[last] - fo[i20]), dh = r1(dd - df), dc = (s.core[last] / s.core[i20] - 1) * 100;
+    const pts = v => signed(v, 1) + ' pts', hu = HV[swRange].human;
+    $('#swipe-tiles').innerHTML = [['Disturbed', fmt(s.dist[i20], 1) + '% → ' + fmt(s.dist[last], 1) + '%', pts(dd)],
+      ['Anthropogenic', fmt(hu[i20], 1) + '% → ' + fmt(hu[last], 1) + '%', pts(dh)],
+      ['Wildfire only', fmt(fo[i20], 1) + '% → ' + fmt(fo[last], 1) + '%', pts(df)],
+      ['Core habitat', signed(dc, 0) + '%', signed((s.core[last] - s.core[i20]) / 1000, 0) + 'k ha']].map(x => '<div class="tile"><span class="k">' + x[0] + '</span><span class="v">' + x[1] + '</span><span class="d">2020 → 2025 · <b>' + x[2] + '</b></span></div>').join('');
+    $('#swipe-copy').textContent = 'In ' + swRange + ', the disturbed share rose from ' + fmt(s.dist[i20], 1) + '% in 2020 to ' + fmt(s.dist[last], 1) + '% in 2025 (' + pts(dd) + '): ' +
+      signed(df, 1) + ' from wildfire and ' + signed(dh, 1) + ' from anthropogenic disturbance. Core habitat ' + (dc < 0 ? 'fell' : 'grew') + ' by ' + fmt(Math.abs(dc), 0) + '%.';
     doSwipe();
   }
   rangeTabs('#swipe-tabs', swRange, r => { swRange = r; showSwipe(); });
@@ -2292,7 +2414,7 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
     const x = v => m.l + ((v - dom[0]) / (dom[1] - dom[0])) * (W - m.l - m.r);
     const svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W, height: H, role: 'img', 'aria-label': 'Share of each range disturbed in 2020, published study and our result' }, host);
     el('rect', { x: x(35), y: m.t - 6, width: x(85) - x(35), height: P.length * rowH + 6, fill: '#f3eef5' }, svg);
-    txt(svg, { x: x(35) + 6, y: m.t - 9, class: 'band-name' }, 'PAST THE 35% LIMIT');
+    txt(svg, { x: x(35) + 6, y: m.t - 9, class: 'band-name' }, 'ABOVE THE 35% THRESHOLD');
     [30, 40, 50, 60, 70, 80].forEach(v => txt(svg, { x: x(v), y: H - 8, 'text-anchor': 'middle', class: 'tick' }, v + '%'));
     P.forEach((p, i) => {
       const yc = m.t + i * rowH + rowH / 2, g = el('g', {}, svg);
@@ -2359,17 +2481,17 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
   })();
   ovWindows();
   const sm = (t, w, d) => OV.summary.find(r => r.type === t && r.window === w && r.dataset === d) || {};
-  (function alignLede() {
-    const ari = sm('Logging', '1980–2020', 'ARI'), ari2 = sm('Logging', '2021–2025', 'ARI'), nbac = sm('Fire', '2000–2020', 'NBAC');
-    $('#align-lede').textContent = 'We checked, pixel by pixel, whether datasets that map the same thing put it in the same places. From 1980 to 2020, ' +
-      fmt(100 - pct(ari.only_this), 0) + '% of ARI’s logging is also in FRI, NTEMS harvest or ECCC’s cutblocks. After 2020 the match drops to ' + fmt(pct(ari2['in_NTEMS harvest']), 0) +
-      '%, because NTEMS stops in 2022 while ARI runs to 2023. Every ARI stand from 2013 on is also checked on satellite images (Check 2). For fire, ' + fmt(100 - pct(nbac.only_this), 0) + '% of NBAC’s 2000–2020 burned area is also in NFDB or ARI.';
-    const nrn = sm('Roads and lines', '2020', 'NRN'), ecl = sm('Roads and lines', '2020', 'ECCC lines'), mnrf = sm('Roads and lines', '2020', 'MNRF roads');
-    const p2 = document.createElement('p');
-    p2.textContent = 'Roads differ in how complete they are: MNRF roads contain ' + fmt(pct(nrn['in_MNRF roads']), 0) + '% of NRN roads and ' + fmt(pct(ecl['in_MNRF roads']), 0) +
-      '% of ECCC 2020 lines, and map many forest roads neither of them has (' + fmt(pct(mnrf.only_this), 0) + '% of MNRF road area). Using MNRF roads and NRN together, as the published study does, misses little. ' +
-      'For settlements and mines, OLCC and ECCC 2020 overlap less, mainly because OLCC also counts farms and rural land.';
-    $('#ov-extra').replaceWith(Object.assign(p2, { className: 'side-note', id: 'ov-extra' }));
+  (function agreeCards() {
+    const v = (ty, w, d) => sm(ty, w, d);
+    const ari = v('Logging', '1980–2020', 'ARI'), ari2 = v('Logging', '2021–2025', 'ARI'), nbac = v('Fire', '2000–2020', 'NBAC');
+    const nrn = v('Roads and lines', '2020', 'NRN'), mnrf = v('Roads and lines', '2020', 'MNRF roads'), ecp = v('Settlements and mines', '2020', 'ECCC polygons');
+    const card = (k, n, txt) => '<li><b>' + k + '</b><em class="big">' + fmt(n, 0) + '%</em><span>' + txt + '</span></li>';
+    $('#agree-cards').innerHTML =
+      card('Logging, 1980–2020', 100 - pct(ari.only_this), 'of ARI logging is also in FRI, NTEMS harvest or ECCC cutblocks.') +
+      card('Logging, 2021–2025', pct(ari2['in_NTEMS harvest']), 'of ARI logging is also in NTEMS harvest. NTEMS ends in 2022 and ARI in 2023, so every ARI stand is also tested on satellite images (Check 2).') +
+      card('Fire, 2000–2020', 100 - pct(nbac.only_this), 'of NBAC burned area is also in NFDB or ARI fire records.') +
+      card('Roads, 2020', pct(nrn['in_MNRF roads']), 'of NRN roads are also in MNRF roads, which add many forest roads (' + fmt(pct(mnrf.only_this), 0) + '% of their area is in no other dataset).') +
+      card('Settlements and mines, 2020', pct(ecp['in_OLCC']), 'of ECCC settlement and mine polygons are also in OLCC, which also maps farms and rural land.');
   })();
 
   // agreement map: how many datasets map each place
@@ -2384,7 +2506,7 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
     $('#ovmap-img').alt = omRange + ': ' + M[1] + ', number of datasets that map each place';
     $('#ovmap-title').textContent = omRange + ' · ' + M[1];
     const n = M[2].length;
-    $('#ovmap-legend').innerHTML = kk(NCOL[0], 'One dataset') + (n > 2 ? kk(NCOL[1], 'Two') + kk(NCOL[2], 'All three') : kk(NCOL[2], 'Both')) +
+    $('#ovmap-legend').innerHTML = kk(NCOL[0], 'One dataset') + (n > 2 ? kk(NCOL[1], 'Two') + kk(NCOL[2], 'All three') : kk(NCOL[2], 'Both datasets')) +
       '<span class="note">' + M[2].join(' · ') + (M[0] === 'roads' || M[0] === 'settlements' ? '. Compared only inside the federal range, where ECCC maps.' : '') + '</span>';
     const win = OV.by_range.find(x => x.type === omType && x.range === omRange).window;
     const dr = OV.by_range.filter(x => x.type === omType && x.range === omRange && x.window === win);
@@ -2402,15 +2524,15 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
     if (!A.flags.length) return;
     $('#flag-note').innerHTML = '<b>Unusual ARI records.</b> ' + A.flags.map(f => 'In ' + f.range + ', ARI dates ' + fmt(f.ari_ha / 1000, 0) + 'k ha of logging to ' + f.year + ', in ' + fmt(f.polygons) +
       ' small pieces (median ' + fmt(f.median_polygon_ha, 1) + ' ha), against about ' + fmt(f.typical_ha / 1000, 0) + 'k ha in a normal year. NTEMS harvest sees ' + fmt(f.seen_by_landsat, 0) + '% of it.').join(' ') +
-      ' These records are left out of the overlap figures. In the 2015–2025 maps they go through the same satellite check as all ARI logging: 34,526 ha of the 48,770 ha show no visible cut and are left out.';
+      ' These records are excluded from the overlap figures. In the 2015–2025 maps they go through the same satellite check as all ARI logging: 34,526 ha of the 48,770 ha show no visible cut and are excluded.';
   })();
 
 
   /* ---------- method: satellite check ---------- */
   const R = S.rates;
-  $('#real-lede').textContent = 'ARI is Ontario\'s own record of what was cut, so we checked it against Landsat and Sentinel-2 images taken before and after each record. ' +
-    fmt(R['L-harvest-new'].pct, 0) + '% of the ARI logging that FRI and NTEMS harvest do not have (2013–2020), and ' + fmt(R['S-harvest'].pct, 0) + '% of all ARI logging from 2018–2024, shows clear forest loss in the images, about as much as logging FRI and NTEMS harvest both record (' +
-    fmt(R['L-control+'].pct, 0) + '%). ARI\'s blowdown, drought and unknown records mostly do not show, and are not used: Canada\'s caribou method counts only human disturbance and fire.';
+  $('#real-lede').textContent = 'ARI is Ontario’s harvest record. We tested it against Landsat and Sentinel-2 summer images taken before and after each record. In a random sample, ' +
+    fmt(R['L-harvest-new'].pct, 0) + '% of ARI logging absent from FRI and NTEMS (2013–2020) and ' + fmt(R['S-harvest'].pct, 0) + '% of all ARI logging (2018–2024) show clear forest loss, similar to logging recorded by both FRI and NTEMS (' +
+    fmt(R['L-control+'].pct, 0) + '%). Blowdown, drought and unknown records rarely show loss and are not used.';
   const RATE_ROWS = {
     L: [['L-control+', 'Reference logging', true, 'Reference', 'in both FRI and NTEMS harvest'], ['L-harvest-new', 'ARI logging', false, 'ARI logging', 'only in ARI: not in FRI or NTEMS'],
         ['L-fire-new', 'ARI fire', false, 'ARI fire', 'only in ARI: not in NFDB'], ['L-other-new', 'ARI blowdown, drought, unknown', false, 'ARI other', 'not used in the maps']],
@@ -2425,7 +2547,7 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
         tip: () => '<b>' + row[1] + '</b> · ' + row[4] + '<br><span class="m">' + fmt(c.pct, 0) + '%</span> show clear forest loss<br><span class="s">' + fmt(c.n) + ' spots checked · likely range ' + fmt(c.lo, 0) + '–' + fmt(c.hi, 0) + '%</span>' +
           (row[2] ? '<br><span class="s">Reference: logging two datasets already agree on</span>' : '') };
     });
-    hbars($('#chart-rates'), rows, { dom: 100, ticks: [0, 50, 100], unit: '%', l: 250, lNarrow: 150, rowH: 46, barH: 20, xTitle: 'Checked spots that show clear forest loss', aria: 'Share of records showing clear forest loss' });
+    hbars($('#chart-rates'), rows, { dom: 100, ticks: [0, 50, 100], unit: '%', l: 250, lNarrow: 150, rowH: 46, barH: 20, xTitle: 'Share of sampled records showing forest loss', aria: 'Share of records showing clear forest loss' });
   }
   btnGroup('#rate-sensor', [['L', 'Records 2013–2020 · Landsat'], ['S', 'Records 2018–2024 · Sentinel-2']], sensor, id => { sensor = id; renderRates(); });
 
@@ -2507,9 +2629,9 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
     satLayer(svg);
     svg.classList.toggle('base-hab', ptBase === 'hab');
     $('#map-pt').classList.toggle('on-sat', ptBase === 'sat');
-    $('#pt-legend').innerHTML = '<span class="key">Year ARI gives the record: ' + Y0 + '<span class="yr-ramp" style="background:linear-gradient(90deg,' + [0, .25, .5, .75, 1].map(k => yrCol(Y0 + k * (Y1 - Y0))).join(',') + ')"></span>' + Y1 + '</span>' +
-      '<span class="key"><span class="sw" style="background:' + yrCol(2018) + '"></span>filled: clear forest loss</span><span class="key"><span class="sw" style="background:#fbfbf9;border:1px solid #171a14"></span>white: no clear loss</span>' +
-      '<span class="note">' + (ptBase === 'sat' ? 'Satellite, summer 2024 (Sentinel-2, false colour): forest green, cuts and burns pink. ' : '') + 'Point at or click a spot for its forest signal; double-click to zoom in and play the summers around its record.</span>';
+    $('#pt-legend').innerHTML = '<span class="key">Year of record: ' + Y0 + '<span class="yr-ramp" style="background:linear-gradient(90deg,' + [0, .25, .5, .75, 1].map(k => yrCol(Y0 + k * (Y1 - Y0))).join(',') + ')"></span>' + Y1 + '</span>' +
+      '<span class="key"><span class="sw" style="background:' + yrCol(2018) + '"></span>filled: loss detected</span><span class="key"><span class="sw" style="background:#fbfbf9;border:1px solid #171a14"></span>white: no loss detected</span>' +
+      '<span class="note">' + (ptBase === 'sat' ? 'Satellite, summer 2024 (Sentinel-2, false colour): forest green, cuts and burns pink. ' : '') + 'Point test at one location per record; the maps use the full-stand test (All ARI logging stands). Double-click a record to play its summers. Scroll to zoom, drag to pan.</span>';
     zoomPt(null);
     showStrip(null);
     renderPanel();
@@ -2554,11 +2676,11 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
     satLayer(svg);
     svg.classList.toggle('base-hab', ptBase === 'hab');
     $('#map-pt').classList.toggle('on-sat', ptBase === 'sat');
-    $('#pt-title').textContent = r + ' · all ARI logging stands, 2013–2023';
+    $('#pt-title').textContent = r + ' · ARI logging stands';
     $('#pt-meta').textContent = 'loading…';
-    $('#pt-legend').innerHTML = '<span class="key">Year ARI gives the stand: ' + Y0 + '<span class="yr-ramp" style="background:linear-gradient(90deg,' + [0, .25, .5, .75, 1].map(k => yrCol(Y0 + k * (Y1 - Y0))).join(',') + ')"></span>' + Y1 + '</span>' +
-      '<span class="key"><span class="sw" style="background:' + yrCol(2018) + '"></span>filled: kept in the maps</span><span class="key"><span class="sw" style="background:#fbfbf9;border:1px solid #171a14"></span>white: left out</span>' +
-      '<span class="note">A stand is kept when at least half of its pixels show forest loss on Landsat or Sentinel-2. Hover a stand for its numbers, click for its result, double-click to zoom in.</span>';
+    $('#pt-legend').innerHTML = '<span class="key">Year of record: ' + Y0 + '<span class="yr-ramp" style="background:linear-gradient(90deg,' + [0, .25, .5, .75, 1].map(k => yrCol(Y0 + k * (Y1 - Y0))).join(',') + ')"></span>' + Y1 + '</span>' +
+      '<span class="key"><span class="sw" style="background:' + yrCol(2018) + '"></span>filled: retained</span><span class="key"><span class="sw" style="background:#fbfbf9;border:1px solid #171a14"></span>white: excluded</span>' +
+      '<span class="note">A stand is retained when at least half of its pixels show forest loss on Landsat or Sentinel-2. Hover a stand for its numbers, click for its result, double-click to play its summers. Scroll to zoom, drag to pan.</span>';
     zoomPt(null); showStrip(null);
     standSel = null; renderStand(null);
     standsOf(r).then(list => {
@@ -2576,25 +2698,33 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
       g.addEventListener('pointerleave', hideTip);
       const choose = ev => { const s = pick(ev); if (!s) return null; $$('path.sel', g).forEach(x => x.classList.remove('sel')); ev.target.classList.add('sel'); standSel = s; renderStand(s); return s; };
       g.addEventListener('click', choose);
-      g.addEventListener('dblclick', ev => { ev.preventDefault(); if (choose(ev)) zoomToShape(ev.target); });
-      $('#pt-meta').textContent = list.filter(s => s[5]).length.toLocaleString('en') + ' of ' + list.length.toLocaleString('en') + ' kept';
+      g.addEventListener('dblclick', ev => { ev.preventDefault(); const s = choose(ev); if (!s) return; if (s[9]) { const pp = standSpot(s); zoomToChip(pp); showStrip(pp); } else zoomToShape(ev.target); });
+      $('#pt-meta').textContent = list.filter(s => s[5]).length.toLocaleString('en') + ' of ' + list.length.toLocaleString('en') + ' retained';
     });
   }
   const pctTxt = v => v == null ? 'no image' : v + '%';
   const standTip = s => '<b>ARI logging, ' + s[1] + '</b><br><span class="m">' + fmt(s[2], s[2] < 10 ? 1 : 0) + ' ha</span><br>Pixels showing forest loss: Landsat <span class="m">' + pctTxt(s[3]) + '</span>, Sentinel-2 <span class="m">' + pctTxt(s[4]) + '</span>' +
-    '<br>' + (s[5] ? 'Kept in the maps' : 'Left out: less than half shows loss') + '<br><span class="s">click for its result, double-click to zoom in</span>';
+    '<br>' + (s[5] ? 'Retained' : 'Excluded: loss in under half of the stand') + '<br><span class="s">click for its result, double-click to play its summers</span>';
+  // the stand's mean NBR on the sensor that shows most loss (Sentinel-2 only from 2018)
+  function standSeries(s) { const useS = !!(s[7] && s[4] != null && (s[3] == null || s[4] > s[3])); return [useS, (useS ? s[7] : s[6]) || null]; }
+  // a stand as a 'spot', so the strip and the time-lapse code can play it
+  function standSpot(s) {
+    const ser = standSeries(s)[1];
+    const pp = [ptRange, 'log', 'L', s[1], 0, 0, s[5], ser ? ser.slice(1) : [], null, s[2], 'Harvest', s[8], s[9]];
+    pp.stand = true; return pp;
+  }
   function renderStand(s, preview) {
     if (!s) {
-      panelHead('', '', false, 'Every ARI logging stand recorded from 2013 to 2023 was checked on summer images from two years before to three years after its year. <b>Point at or click a stand</b> to draw its forest signal; <b>double-click</b> to zoom in.', '');
+      panelHead('', '', false, 'Every ARI logging stand recorded from 2013 to 2023 was checked on summer images from two years before to three years after its year. <b>Point at or click a stand</b> to draw its forest signal; <b>double-click</b> to zoom in and play its summers.', '');
       setTrace(null); return;
     }
     const bar = (nm, v) => '<div class="sv-bar"><span>' + nm + '</span><span class="tr">' + (v == null ? '' : '<i style="width:' + v + '%;background:' + yrCol(s[1]) + '"></i>') + '<b></b></span><span>' + pctTxt(v) + '</span></div>';
     // the line: the stand's mean NBR on the sensor that shows most loss (Sentinel-2 only from 2018)
-    const useS = s[7] && s[4] != null && (s[3] == null || s[4] > s[3]), ser = (useS ? s[7] : s[6]) || null;
-    panelHead(preview ? 'Stand under the pointer' : '', s[5] ? 'Kept in the maps' : 'Left out of the maps', s[5],
-      'ARI logging recorded in ' + s[1] + ' · ' + fmt(s[2], s[2] < 10 ? 1 : 0) + ' ha · line: mean of the stand, ' + (useS ? 'Sentinel-2' : 'Landsat'),
-      bar('Landsat', s[3]) + bar('Sentinel-2', s[4]) + '<p class="sub" style="margin:2px 0 0">Share of the stand’s pixels where the forest signal falls by more than 0.1; dashed line: the 50% needed to keep it.</p>');
-    setTrace(ser ? ser.slice(1) : null, s[1], yrCol(s[1]), null);
+    const [useS, ser] = standSeries(s);
+    panelHead(preview ? 'Under the cursor' : '', s[5] ? 'Retained' : 'Excluded', s[5],
+      'ARI logging recorded in ' + s[1] + ' · ' + fmt(s[2], s[2] < 10 ? 1 : 0) + ' ha · line: stand mean, ' + (useS ? 'Sentinel-2' : 'Landsat'),
+      bar('Landsat', s[3]) + bar('Sentinel-2', s[4]) + '<p class="sub" style="margin:2px 0 0">Share of the stand’s pixels where NBR falls by more than 0.1. Dashed line: 50% retention threshold.</p>');
+    setTrace(ser ? ser.slice(1) : null, s[1], yrCol(s[1]), s[8]);
   }
   function zoomToChip(p) {
     const [cx0, cy0, side] = p[12], e = ptPlate, s = side * 1.12, ar = e.w / e.h;
@@ -2615,7 +2745,7 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
     im.onerror = () => { host.hidden = true; };
     im.onload = () => { host.hidden = false; };
     im.addEventListener('click', ev => { const r = im.getBoundingClientRect(); tlGo(Math.min(6, Math.floor((ev.clientX - r.left) / r.width * 7)), true); });
-    chipSrc(p[0], p[11]).then(src => {
+    (p.stand ? standChipSrc(p[0], p[11]) : chipSrc(p[0], p[11])).then(src => {
       if (!src) { host.hidden = true; return; }
       if ($('img', host) !== im) return;
       im.src = src;
@@ -2682,6 +2812,19 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
       if (k >= 0) { const xx = ch.__x(k), yy = ch.__y(tl.p[7][k]); $('line', mk).setAttribute('x1', xx); $('line', mk).setAttribute('x2', xx); $('circle', mk).setAttribute('cx', xx); $('circle', mk).setAttribute('cy', yy); }
     }
   }
+  // stand strips (build_stand_chips.py): an index per range, binary chunks cut into images on demand
+  const SCI = {}, SCB = {}, SCU = {};
+  function standChipSrc(range, uid) {
+    if (SCU[uid]) return Promise.resolve(SCU[uid]);
+    const r = range.toLowerCase();
+    if (!SCI[r]) SCI[r] = fetch('stand_chips/' + r + '.json').then(x => x.ok ? x.json() : {}).catch(() => ({}));
+    return SCI[r].then(ix => {
+      const at = ix[uid]; if (!at) return null;
+      const key = r + '_' + at[0];
+      if (!SCB[key]) SCB[key] = fetch('stand_chips/' + key + '.webp').then(x => x.ok ? x.arrayBuffer() : null).catch(() => null);
+      return SCB[key].then(buf => buf ? (SCU[uid] = URL.createObjectURL(new Blob([buf.slice(at[1], at[1] + at[2])], { type: 'image/webp' }))) : null);
+    });
+  }
   // strips are packed per range in a few chunks (build_chips.py), loaded the first time a spot there is opened
   const CHIPS = {};
   function chipSrc(range, pid) {
@@ -2695,62 +2838,83 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
     const host = $('#pt-panel');
     if (TC && host.contains(TC.svg)) return TC;
     host.innerHTML = '<span class="tc-tag"></span><div class="verdict tc-v"></div><div class="sub tc-sub"></div><div class="sv-bars tc-bars"></div>';
-    const W = Math.max(220, host.clientWidth - 30), H = 168, m = { l: 34, r: 22, t: 12, b: 40 };
-    const svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W, height: H, role: 'img', 'aria-label': 'Forest signal over time' }, host);
-    const x = i => m.l + (i / 5) * (W - m.l - m.r);
-    const band = el('rect', { x: x(2) - (x(1) - x(0)) / 2, y: m.t, width: x(1) - x(0), height: H - m.t - m.b, fill: '#f3eef5' }, svg);
-    txt(svg, { x: x(2), y: m.t + 10, 'text-anchor': 'middle', class: 'tick' }, 'record');
+    const W = Math.max(220, host.clientWidth - 30), H = 196, m = { l: 30, r: 12, t: 16, b: 46 };
+    const svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W, height: H, role: 'img', 'aria-label': 'Forest signal over time', class: 'tc-svg' }, host);
+    const x = i => m.l + 10 + (i / 5) * (W - m.l - m.r - 20);
+    const defs = el('defs', {}, svg);
+    const grad = el('linearGradient', { id: 'tc-grad', x1: 0, x2: 0, y1: 0, y2: 1 }, defs);
+    const g0 = el('stop', { offset: '0%', 'stop-opacity': .35 }, grad), g1 = el('stop', { offset: '100%', 'stop-opacity': 0 }, grad);
+    const clip = el('clipPath', { id: 'tc-clip' }, defs), clipR = el('rect', { x: 0, y: 0, width: 0, height: H }, clip);
+    // zones: closed forest above, cut or burned below
+    el('rect', { x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, fill: '#f6f7f3', rx: 6 }, svg);
+    const zTop = el('rect', { x: m.l, width: W - m.l - m.r, fill: '#e3f1e5', rx: 6 }, svg);
+    const zLow = el('rect', { x: m.l, width: W - m.l - m.r, fill: '#f8e6ee', rx: 6 }, svg);
+    const zTopT = txt(svg, { x: W - m.r - 8, 'text-anchor': 'end', class: 'tc-zone', fill: '#2e6843' }, 'closed forest');
+    const zLowT = txt(svg, { x: W - m.r - 8, 'text-anchor': 'end', class: 'tc-zone', fill: '#a3416b' }, 'cut or burned');
     const grid = el('g', {}, svg);
-    const yl = [0, 1, 2, 3, 4, 5].map(i => txt(svg, { x: x(i), y: H - m.b + 15, 'text-anchor': 'middle', class: 'tick' }, ''));
-    const lowLine = el('line', { x1: m.l, x2: W - m.r, 'stroke-width': 1, 'stroke-dasharray': '3 3', opacity: .55 }, svg);
-    const ring = el('circle', { r: 6.5, fill: 'none', 'stroke-width': 2 }, svg);
-    const lowTxt = txt(svg, { y: H - 6, class: 'tick', style: 'font-weight:700' }, '');
-    const faint = el('path', { fill: 'none', 'stroke-width': 1, opacity: .18 }, svg);
-    const tr = el('path', { fill: 'none', 'stroke-width': 2.6, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, svg);
-    const dots = [0, 1, 2, 3, 4, 5].map(() => el('circle', { r: 3 }, svg));
-    const head = el('circle', { r: 4.5, fill: '#fbfbf9', 'stroke-width': 2.5 }, svg);
-    const empty = txt(svg, { x: (m.l + W - m.r) / 2, y: (m.t + H - m.b) / 2, 'text-anchor': 'middle', class: 'tick', style: 'font-size:12px' }, 'point at a shape on the map');
+    // the record year: a dashed marker
+    el('line', { x1: x(2), x2: x(2), y1: m.t + 14, y2: H - m.b, stroke: '#6c7166', 'stroke-width': 1.2, 'stroke-dasharray': '3 3' }, svg);
+    txt(svg, { x: x(2), y: m.t + 10, 'text-anchor': 'middle', class: 'tc-zone', fill: '#4b5046' }, 'recorded');
+    const yl = [0, 1, 2, 3, 4, 5].map(i => txt(svg, { x: x(i), y: H - m.b + 16, 'text-anchor': 'middle', class: 'tick' }, ''));
+    const area = el('path', { fill: 'url(#tc-grad)', 'clip-path': 'url(#tc-clip)' }, svg);
+    const faint = el('path', { fill: 'none', 'stroke-width': 1.2, opacity: .22, 'stroke-dasharray': '2 3' }, svg);
+    const tr = el('path', { fill: 'none', 'stroke-width': 3, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, svg);
+    const lowLine = el('line', { 'stroke-width': 1, 'stroke-dasharray': '2 3', opacity: .6 }, svg);
+    const dots = [0, 1, 2, 3, 4, 5].map(() => el('circle', { r: 3.4, fill: '#fff', 'stroke-width': 2 }, svg));
+    const ring = el('circle', { r: 7.5, fill: 'none', 'stroke-width': 2 }, svg);
+    const badge = el('g', { opacity: 0 }, svg), badgeR = el('rect', { height: 18, rx: 9 }, badge), badgeT = txt(badge, { class: 'tc-badge', 'text-anchor': 'middle' }, '');
+    const head = el('circle', { r: 5, fill: '#fff', 'stroke-width': 3 }, svg);
+    const empty = txt(svg, { x: (m.l + W - m.r) / 2, y: (m.t + H - m.b) / 2 + 4, 'text-anchor': 'middle', class: 'tick', style: 'font-size:12px' }, 'point at a shape on the map');
     const note = document.createElement('p'); note.className = 'sub tc-note'; host.appendChild(note);
     note.textContent = 'Forest signal (NBR) each summer: high over closed forest, it falls when trees are cut or burned.';
-    return (TC = { host, svg, W, H, m, x, band, grid, yl, lowLine, ring, lowTxt, faint, tr, dots, head, empty });
+    return (TC = { host, svg, W, H, m, x, g0, g1, clipR, zTop, zLow, zTopT, zLowT, grid, yl, area, faint, tr, lowLine, dots, ring, badge, badgeR, badgeT, head, empty });
   }
   // vals: NBR for the six summers Y-2 ... Y+3 (null where no image); year: the record year
   function setTrace(vals, year, col, pid) {
     const c = traceBox(), { svg, W, H, m, x } = c;
     cancelAnimationFrame(ecgRaf);
     const on = !!vals && vals.some(v => v != null);
-    [c.lowLine, c.ring, c.lowTxt, c.faint, c.tr, c.head, ...c.dots].forEach(n => n.style.display = on ? '' : 'none');
+    [c.area, c.faint, c.tr, c.lowLine, c.ring, c.badge, c.head, ...c.dots].forEach(n => n.style.display = on ? '' : 'none');
     c.empty.style.display = on ? 'none' : '';
-    c.yl.forEach((tx, i) => { tx.textContent = year ? year - 2 + i : ['−2', '−1', 'rec', '+1', '+2', '+3'][i]; tx.style.fontWeight = ''; });
-    const ok = on ? vals.map(v => v == null ? null : v) : [];
-    const have = ok.filter(v => v != null);
-    const lo = Math.min(0, ...(have.length ? have : [0])) - 0.05, hi = Math.max(0.8, ...(have.length ? have : [0])) + 0.05;
+    c.yl.forEach((tx, i) => { tx.textContent = year ? year - 2 + i : ['−2', '−1', 'rec', '+1', '+2', '+3'][i]; tx.style.fontWeight = i === 2 ? '700' : ''; });
+    const ok = on ? vals : [], have = ok.filter(v => v != null);
+    const lo = Math.min(-0.1, ...(have.length ? have : [0])) - 0.04, hi = Math.max(0.8, ...(have.length ? have : [0])) + 0.04;
     const y = v => m.t + ((hi - v) / (hi - lo)) * (H - m.t - m.b);
+    // zones follow the scale: closed forest above 0.5, cut or burned below 0.2
+    c.zTop.setAttribute('y', m.t); c.zTop.setAttribute('height', Math.max(0, y(0.5) - m.t));
+    c.zLow.setAttribute('y', y(0.2)); c.zLow.setAttribute('height', Math.max(0, H - m.b - y(0.2)));
+    c.zTopT.setAttribute('y', m.t + 13); c.zLowT.setAttribute('y', H - m.b - 6);
     c.grid.innerHTML = '';
-    [0, 0.4, 0.8].filter(v => v > lo && v < hi).forEach(v => { el('line', { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), stroke: '#e2e4dc' }, c.grid); txt(c.grid, { x: m.l - 5, y: y(v) + 3.5, 'text-anchor': 'end', class: 'tick' }, v.toFixed(1)); });
+    [0, 0.5].filter(v => v > lo && v < hi).forEach(v => { el('line', { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), stroke: '#d6d9cf', 'stroke-width': .8 }, c.grid); txt(c.grid, { x: m.l - 5, y: y(v) + 3.5, 'text-anchor': 'end', class: 'tick' }, v.toFixed(1)); });
     Object.assign(svg, { __x: x, __y: y, __top: m.t, __bottom: H - m.b, __pid: pid });
     if (!on) return;
-    let lowI = 0; ok.forEach((v, i) => { if (v != null && (ok[lowI] == null || v < ok[lowI])) lowI = i; });
-    c.yl[lowI].style.fontWeight = '700';
-    let d = '', pen = false;
-    ok.forEach((v, i) => { if (v == null) { pen = false; return; } d += (pen ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(v).toFixed(1); pen = true; });
+    let lowI = -1; ok.forEach((v, i) => { if (v != null && (lowI < 0 || v < ok[lowI])) lowI = i; });
+    const pts = ok.map((v, i) => v == null ? null : [x(i), y(v)]);
+    let d = '', pen = false; pts.forEach(q => { if (!q) { pen = false; return; } d += (pen ? 'L' : 'M') + q[0].toFixed(1) + ' ' + q[1].toFixed(1); pen = true; });
+    const real = pts.filter(Boolean);
+    c.area.setAttribute('d', d + 'L' + real[real.length - 1][0].toFixed(1) + ' ' + (H - m.b) + 'L' + real[0][0].toFixed(1) + ' ' + (H - m.b) + 'Z');
+    c.g0.setAttribute('stop-color', col); c.g1.setAttribute('stop-color', col);
     [c.faint, c.tr].forEach(n => { n.setAttribute('d', d); n.setAttribute('stroke', col); });
-    c.lowLine.setAttribute('y1', y(ok[lowI])); c.lowLine.setAttribute('y2', y(ok[lowI])); c.lowLine.setAttribute('stroke', col);
-    c.ring.setAttribute('cx', x(lowI)); c.ring.setAttribute('cy', y(ok[lowI])); c.ring.setAttribute('stroke', col);
-    c.lowTxt.setAttribute('x', Math.min(W - m.r, Math.max(m.l, x(lowI)))); c.lowTxt.setAttribute('text-anchor', lowI === 0 ? 'start' : lowI === 5 ? 'end' : 'middle');
-    c.lowTxt.style.fill = col; c.lowTxt.textContent = 'lowest ' + fmt(ok[lowI], 2);
-    c.dots.forEach((dot, i) => { dot.style.display = ok[i] == null ? 'none' : ''; if (ok[i] != null) { dot.setAttribute('cx', x(i)); dot.setAttribute('cy', y(ok[i])); dot.setAttribute('fill', col); } });
-    c.head.setAttribute('stroke', col); c.head.style.filter = 'drop-shadow(0 0 4px ' + col + ')';
-    // the trace: drawn left to right with a bright head, then again, like a heart monitor
-    const L = c.tr.getTotalLength() || 1, SWEEP = 2000, HOLD = 1100, xs = ok.map((_, i) => x(i));
+    c.dots.forEach((dot, i) => { dot.style.display = pts[i] ? '' : 'none'; if (pts[i]) { dot.setAttribute('cx', pts[i][0]); dot.setAttribute('cy', pts[i][1]); dot.setAttribute('stroke', col); } });
+    const lx = pts[lowI][0], ly = pts[lowI][1];
+    c.lowLine.setAttribute('x1', lx); c.lowLine.setAttribute('x2', lx); c.lowLine.setAttribute('y1', ly + 8); c.lowLine.setAttribute('y2', H - m.b + 22); c.lowLine.setAttribute('stroke', col);
+    c.ring.setAttribute('cx', lx); c.ring.setAttribute('cy', ly); c.ring.setAttribute('stroke', col);
+    c.badgeT.textContent = 'lowest ' + fmt(ok[lowI], 2) + (year ? ' · ' + (year - 2 + lowI) : '');
+    const bw = c.badgeT.textContent.length * 6.4 + 16, bx = Math.min(W - m.r - bw / 2, Math.max(m.l + bw / 2, lx));
+    c.badgeR.setAttribute('x', bx - bw / 2); c.badgeR.setAttribute('y', H - 19); c.badgeR.setAttribute('width', bw); c.badgeR.setAttribute('fill', col);
+    c.badgeT.setAttribute('x', bx); c.badgeT.setAttribute('y', H - 6.5);
+    c.head.setAttribute('stroke', col); c.head.style.filter = 'drop-shadow(0 0 5px ' + col + ')';
+    // the trace: drawn left to right with a bright head, the area filling behind it, then again, like a heart monitor
+    const L = c.tr.getTotalLength() || 1, SWEEP = 2000, HOLD = 1100, xs = pts.map(q => q ? q[0] : Infinity);
     const show = k => {
       c.tr.setAttribute('stroke-dasharray', L + ' ' + L);
       c.tr.setAttribute('stroke-dashoffset', L * (1 - k));
       const q = c.tr.getPointAtLength(L * k);
+      c.clipR.setAttribute('width', Math.max(0, q.x));
       c.head.setAttribute('cx', q.x); c.head.setAttribute('cy', q.y); c.head.style.opacity = k > 0 && k < 1 ? 1 : 0;
       c.dots.forEach((dot, i) => dot.setAttribute('opacity', xs[i] <= q.x + 0.5 ? 1 : 0));
       const low = xs[lowI] <= q.x + 0.5;
-      c.ring.setAttribute('opacity', low ? 1 : 0); c.lowTxt.setAttribute('opacity', low ? 1 : 0);
+      c.ring.setAttribute('opacity', low ? 1 : 0); c.badge.setAttribute('opacity', low ? 1 : 0); c.lowLine.setAttribute('opacity', low ? .6 : 0);
     };
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) show(1);
     else { const t0 = performance.now(); const step = now => { show(Math.min(1, ((now - t0) % (SWEEP + HOLD)) / SWEEP)); ecgRaf = requestAnimationFrame(step); }; ecgRaf = requestAnimationFrame(step); }
@@ -2765,27 +2929,46 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
   function renderPanel(pv) {
     const p = pv || ptSel;
     if (!p) {
-      panelHead('', '', false, ptHasSpots ? '<b>Point at or click a spot</b> on the map to draw its forest signal. <b>Double-click</b> to zoom in and play the satellite images.' : 'No checked spots of this type in ' + ptRange + '. Try another range.', '');
+      panelHead('', '', false, ptHasSpots ? '<b>Hover or click a record</b> to plot its forest signal. <b>Double-click</b> to play the satellite images.' : 'No checked spots of this type in ' + ptRange + '. Try another range.', '');
       setTrace(null); return;
     }
-    panelHead(pv && pv !== ptSel ? 'Spot under the pointer' : '', p[6] ? 'Clear forest loss' : 'No clear forest loss', p[6],
+    panelHead(pv && pv !== ptSel ? 'Under the cursor' : '', p[6] ? 'Clear forest loss' : 'No clear forest loss', p[6],
       (p[10] || GNAME[p[1]]) + ' recorded in ' + p[3] + (p[9] != null ? ' · ' + fmt(p[9], p[9] < 10 ? 1 : 0) + ' ha' : '') + ' · ' + (p[2] === 'L' ? 'Landsat' : 'Sentinel-2') + ' · largest drop ' + fmt(bigDrop(p[7]), 2) + (p[6] ? ' (more than 0.1)' : ' (not more than 0.1)'), '');
     setTrace(p[7], p[3], GCOL[p[1]], p[11]);
   }
   btnGroup('#pt-group', GROUPS, ptGroup, id => { ptGroup = id; ptSel = null; showPoints(); });
   rangeTabs('#pt-tabs', ptRange, r => { ptRange = r; ptSel = null; showPoints(); });
   btnGroup('#pt-base', [['hab', 'Habitat map'], ['sat', 'Satellite 2024']], ptBase, b => { ptBase = b; ptSvg.classList.toggle('base-hab', b === 'hab'); showPoints(); });
-  btnGroup('#pt-view', [['sample', 'Spots checked (sample)'], ['all', 'All ARI logging stands']], ptView, v => { ptView = v; ptSel = null; showPoints(); });
+  btnGroup('#pt-view', [['sample', 'Sampled records'], ['all', 'All ARI logging stands']], ptView, v => { ptView = v; ptSel = null; showPoints(); });
   showPoints();
 
   /* ---------- discussion ---------- */
+  function answers() {
+    const B = S.bases.managed_water, T0 = B._total, A = r => B[r].area;
+    const above = RANGES.every(r => B[r].dist.every(v => v > 35));
+    $('#qa1').innerHTML = (above ? '<b>All seven ranges exceed the 35% threshold in every year.</b> ' : '') + 'The disturbed share rose from ' + fmt(T0.dist[0], 0) + '% in 2015 to ' +
+      fmt(T0.dist[last], 0) + '% in 2025, and core habitat declined by ' + fmt(Math.abs((T0.core[last] / T0.core[0] - 1) * 100), 0) + '%.';
+    const share = k => 100 * RANGES.reduce((a, r) => a + B[r][k][last] * A(r), 0) / RANGES.reduce((a, r) => a + B[r].dist[last] * A(r), 0);
+    const fireLed = RANGES.filter(r => B[r].fire[last] > B[r].human[last]);
+    $('#qa2').innerHTML = '<b>' + fmt(share('human'), 0) + '% of the disturbance in 2025 is anthropogenic</b> (logging, roads, mines, settlements) and ' + fmt(share('fire'), 0) + '% is wildfire' +
+      (fireLed.length ? '; wildfire dominates only in ' + listing(fireLed) : '') + '.';
+    if (S.ladder) {
+      const L = r => S.ladder[r]['2025'], ar = r => L(r).study.hm / (L(r).study.pm / 100), AA = RANGES.reduce((a, r) => a + ar(r), 0);
+      const v = s => RANGES.reduce((a, r) => a + L(r)[s].pm * ar(r), 0) / AA;
+      $('#qa3').innerHTML = '<b>They add ' + fmt(v('c18') - v('study'), 1) + ' points across the ranges in 2025</b>, mostly fires after 2018. ARI logging adds ' + fmt(v('ari') - v('nbac'), 1) +
+        ' points and is retained only where satellite imagery confirms the cut.';
+    }
+    const P = S.paper, gaps = P.map(p => Math.abs(p.ours - p.paper));
+    $('#qa-check').innerHTML = '<b>Method check.</b> With the published study’s data and rules, our 2020 result is within ' + fmt(Math.min(...gaps), 0) + '–' + fmt(Math.max(...gaps), 0) +
+      ' points of Mackey et al. (2024) in every range. <a href="#step-a">Reproduction →</a>';
+  }
   function meaning() {
     const worst = RANGES.slice().sort((a, b) => S.series[b].dist[last] - S.series[a].dist[last])[0];
     $('#meaning-list').innerHTML = [
-      'None of the seven ranges has enough undisturbed forest to be considered safe for a self-sustaining caribou herd. ' + worst + ' is the most disturbed, at ' + fmt(S.series[worst].dist[last], 0) + '%.',
-      'Core habitat across the seven ranges shrank by ' + fmt(Math.abs((T.core[last] / T.core[0] - 1) * 100), 0) + '% in ten years.',
-      'Most of the disturbance is anthropogenic: ' + fmt(100 * humanShare(last), 0) + '% of it in 2025. Unlike wildfire, that part can be managed.',
-      'ARI logging and NBAC fire match the published study’s datasets where both cover the same years, and ARI logging from 2013 on is kept only where satellite images show the cut.',
+      'None of the seven ranges meets the federal threshold for a self-sustaining population. ' + worst + ' is the most disturbed, at ' + fmt(S.series[worst].dist[last], 0) + '%.',
+      'Core habitat across the seven ranges declined by ' + fmt(Math.abs((T.core[last] / T.core[0] - 1) * 100), 0) + '% between 2015 and 2025.',
+      'Most disturbance is anthropogenic (' + fmt(100 * humanShare(last), 0) + '% in 2025) and can therefore be managed, unlike wildfire.',
+      'ARI logging and NBAC fire agree with the published study’s datasets where both cover the same years; ARI logging from 2013 on is retained only where satellite imagery confirms the cut.',
     ].map(t => '<li>' + t + '</li>').join('');
   }
   /* ---------- how our numbers compare: two bases, 2020 and 2025, and what each addition adds ---------- */
@@ -2846,7 +3029,7 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
       el('line', { x1: m.l, x2: W - m.r, y1: y(35), y2: y(35), stroke: '#171a14', 'stroke-width': 1.2, 'stroke-dasharray': '4 3' }, svg);
     });
     $('#rings-legend').innerHTML = SRC.map(s => kk(s[1], s[0] + (s[3] ? (cmpBasis === 'managed' ? ' (measured by us)' : ' (rebuilt by us)') : ''))).join('') +
-      '<span class="key"><span class="sw" style="height:0;width:14px;border:0;border-top:2px dashed #171a14;border-radius:0"></span>35% limit</span>' +
+      '<span class="key"><span class="sw" style="height:0;width:14px;border:0;border-top:2px dashed #171a14;border-radius:0"></span>35% threshold</span>' +
       '<span class="note">Hover a bar for its source. Human disturbance carries a 500 m buffer zone, fire does not.</span>';
   }
 
@@ -2887,7 +3070,7 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
       const [, name, c] = ROWS.find(rw => rw[0] === id), fire = c.d.fire40 + c.d.nbac;
       say.innerHTML = '<b>' + name + ', ' + ladYear + '.</b> With the published study’s data, <b>' + pc(c.p0) + '</b> of ' + (id === 'All' ? 'the ranges’ area is' : 'the range is') + ' disturbed. This study finds <b>' + pc(c.fin) + '</b>: ' +
         '<b>' + sp(fire) + '</b> from more fire (NFDB ' + sp(c.d.fire40) + ', NBAC ' + sp(c.d.nbac) + '), <b>' + sp(c.d.ari) + '</b> from more logging (ARI)' +
-        (Math.abs(c.d.c18) >= 0.05 ? ', and <b>' + sp(c.d.c18) + '</b> because old burns in class 18 now count as fire.' : '.') +
+        (Math.abs(c.d.c18) >= 0.05 ? ', and <b>' + sp(c.d.c18) + '</b> because burns in land-cover class 18 are reclassified as fire.' : '.') +
         ' ECCC’s 2020 map, not used here, would add <b>' + fmt(Math.abs(c.ec), 1) + '</b> more points.';
       $$('tbody tr', wrap).forEach(tr => tr.classList.toggle('on', tr.dataset.id === id));
     }
@@ -2912,8 +3095,39 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
   btnGroup('#cmp-basis', [['managed', 'Managed forest'], ['whole', 'Whole range']], cmpBasis, v => { cmpBasis = v; compareRings(); compareTable(); renderLadder(); });
   btnGroup('#lad-year', [['2020', '2020'], ['2025', '2025']], ladYear, v => { ladYear = v; renderLadder(); });
   let cmpSeen = false, ladSeen = false;
-  function updateBasis() { applyBasis(); keyNums(); resultsLede(); meaning(); renderDonuts(); renderMultiples(); renderCause(); }
-  applyBasis(); keyNums(); resultsLede(); meaning(); compareTable(); compareRings(); renderLadder();
+  // key findings for each result, from the current basis
+  function highlights() {
+    const hc = (v, k, cls) => '<div class="hc' + (cls ? ' ' + cls : '') + '"><span class="hv">' + v + '</span><span class="hk">' + k + '</span></div>';
+    const s = r => S.series[r], by = f => RANGES.slice().sort((a, b) => f(b) - f(a));
+    const d = r => s(r).dist[last], top = by(d), low = top[top.length - 1];
+    const over = RANGES.filter(r => d(r) > 35).length;
+    $('#hl-overview').innerHTML =
+      hc(fmt(d(top[0]), 0) + '%', '<b>' + top[0] + '</b> is the most disturbed range', 'warm') +
+      hc(fmt(d(low), 0) + '%', '<b>' + low + '</b> is the least disturbed, and still above 35%') +
+      hc(over + ' of 7', 'ranges above the 35% threshold in 2025', over === 7 ? 'warm' : '');
+    const rise = by(r => s(r).dist[last] - s(r).dist[0]), coreLoss = by(r => 1 - s(r).core[last] / s(r).core[0]);
+    $('#hl-results').innerHTML =
+      hc('+' + fmt(s(rise[0]).dist[last] - s(rise[0]).dist[0], 1) + ' pts', '<b>' + rise[0] + '</b> rose fastest since 2015', 'warm') +
+      hc('−' + fmt(100 * (1 - s(coreLoss[0]).core[last] / s(coreLoss[0]).core[0]), 0) + '%', '<b>' + coreLoss[0] + '</b> lost the largest share of its core habitat') +
+      hc(fmt((T.core[0] - T.core[last]) / 1000, 0) + 'k ha', 'of core habitat lost across the seven ranges since 2015', 'cool');
+    const hum = r => HV[r].human[last], fo = r => HV[r].fire_only[last];
+    const hs = by(r => hum(r) / Math.max(1e-9, hum(r) + fo(r))), fs = by(fo), alone = RANGES.filter(r => hum(r) > 35).length;
+    $('#hl-cause').innerHTML =
+      (v => hc(fmt(v, v > 99 ? 1 : 0) + '%', 'of <b>' + hs[0] + '</b>’s disturbance is anthropogenic'))(100 * hum(hs[0]) / (hum(hs[0]) + fo(hs[0]))) +
+      hc(fmt(fo(fs[0]), 0) + '%', 'of <b>' + fs[0] + '</b> is burned, the most wildfire of any range', 'warm') +
+      hc(alone + ' of 7', 'ranges exceed 35% from anthropogenic disturbance alone');
+    const jump = by(r => s(r).dist[last] - s(r).dist[i20]);
+    $('#hl-swipe').innerHTML = hc('+' + fmt(s(jump[0]).dist[last] - s(jump[0]).dist[i20], 1) + ' pts', 'biggest five-year jump: <b>' + jump[0] + '</b>, 2020 → 2025', 'warm');
+    if (S.ladder && S.eccc) {
+      const add = by(r => S.ladder[r]['2025'].c18.pm - S.ladder[r]['2025'].study.pm), gap = by(r => S.eccc[r].managed - S.eccc[r].whole);
+      const a0 = add[0], g0 = gap[0];
+      $('#hl-compare').innerHTML =
+        hc('+' + fmt(S.ladder[a0]['2025'].c18.pm - S.ladder[a0]['2025'].study.pm, 1) + ' pts', 'newer records add most in <b>' + a0 + '</b> (2025), mainly recent fires', 'warm') +
+        hc(fmt(S.eccc[g0].whole, 0) + '% → ' + fmt(S.eccc[g0].managed, 0) + '%', 'ECCC for <b>' + g0 + '</b>: whole range vs managed forest', 'cool');
+    }
+  }
+  function updateBasis() { applyBasis(); keyNums(); resultsLede(); meaning(); renderDonuts(); renderMultiples(); renderCause(); highlights(); }
+  applyBasis(); keyNums(); resultsLede(); meaning(); answers(); highlights(); compareTable(); compareRings(); renderLadder();
 
   /* ---------- dashboard card: the selected range, or all seven ---------- */
   function renderRangeCard() {
@@ -2927,7 +3141,7 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
     const d = dist[yi], rk = risk(d);
     host.innerHTML = '<div class="dr-head"><span class="dr-name">' + name + '</span><span class="dr-risk' + (rk === 'very high' ? ' vh' : '') + '">' + rk + ' risk</span></div>' +
       '<div class="dr-big">' + fmt(d, 0) + '%<small>disturbed in ' + donutYear + '</small></div>' +
-      '<div class="dr-bar" title="Anthropogenic, wildfire and the 35% limit"><i style="width:' + hu + '%;background:' + PEOPLE + '"></i><i style="width:' + fo + '%;background:' + FIRE + '"></i><b></b></div>' +
+      '<div class="dr-bar" title="Anthropogenic, wildfire and the 35% threshold"><i style="width:' + hu + '%;background:' + PEOPLE + '"></i><i style="width:' + fo + '%;background:' + FIRE + '"></i><b></b></div>' +
       '<div class="dr-rows"><div><span>Anthropogenic</span><span>' + fmt(hu, 1) + '%</span></div><div><span>Wildfire only</span><span>' + fmt(fo, 1) + '%</span></div>' +
       '<div><span>Core habitat</span><span>' + fmt(core[yi] / 1000) + 'k ha</span></div><div><span>Change since 2015</span><span>' + signed((core[yi] / core[0] - 1) * 100, 0) + '% core · ' + signed(d - dist[0], 1) + ' pts</span></div></div>';
     // trend line 2015-2025 with the selected year marked
@@ -3152,6 +3366,23 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
     addEventListener('resize', revealCheck);
     setTimeout(check, 60);
   })();
+  /* ---------- notes: every explanatory note folds into a small 'Note' drop-down ---------- */
+  (function foldNotes() {
+    const SEL = '.plate-foot .note, p.figline-note, p.side-note';
+    const fold = n => {
+      if (!n.isConnected || n.closest('details.note-fold') || !n.textContent.trim()) return;
+      const d = document.createElement('details'); d.className = 'note-fold';
+      d.innerHTML = '<summary>Note</summary>';
+      n.replaceWith(d); d.appendChild(n);
+    };
+    const scan = root => root.querySelectorAll(SEL).forEach(fold);
+    scan(document);
+    new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(n => {
+      if (n.nodeType !== 1) return;
+      if (n.matches(SEL)) fold(n); else scan(n);
+    }))).observe(document.querySelector('main') || document.body, { childList: true, subtree: true });
+  })();
+
   /* ---------- dataset explorer: switch each dataset on and off, range by range ---------- */
   (function datasetExplorer() {
     if (!S.dx || !$('#map-dx')) { const b = $('#explore'); if (b) b.hidden = true; return; }
@@ -3203,7 +3434,7 @@ const S = {"built":"2026-10-06","years":[2015,2016,2017,2018,2019,2020,2021,2022
         ctx.putImageData(out, 0, 0);
       });
       $('#dx-legend').innerHTML = names.map((nm, i) => kk(DCOL[i], 'Only ' + nm)).join('') +
-        (n === 2 ? kk(ALL, 'Both') : n === 3 ? kk(TWO, 'Two datasets') + kk(ALL, 'All three') : kk(TWO, 'Two or three') + kk(ALL, 'All four')) +
+        (n === 2 ? kk(ALL, 'Both datasets') : n === 3 ? kk(TWO, 'Two datasets') + kk(ALL, 'All three') : kk(TWO, 'Two or three') + kk(ALL, 'All four')) +
         '<span class="note">Map cells are about ' + Math.round(EX[range].res) + ' m across; the percentages use the full 30 m grid.</span>';
     }
     function list() {
@@ -3341,8 +3572,8 @@ window.mmInit = function () {
     vlce2: [['From', 'Natural Resources Canada'], ['Year', '2019'], ['Pixel', '30 m'], ['Used for', 'where habitat can be']],
     fri: [['From', 'Ontario MNRF'], ['Years', '1980–2020'], ['Holds', 'logged and planted stands, corridors'], ['Overlap', '83% of its 1980–2020 logging is also in NTEMS']],
     ntems: [['From', 'Canadian Forest Service'], ['Years', '1985–2020'], ['Pixel', '30 m, from Landsat'], ['Overlap', '91% of its 1985–2020 logging is also in ARI']],
-    ari: [['From', 'Ontario MNRF'], ['Adds', 'logging after 2020'], ['Overlap', '84% of its 1980–2020 logging is also in NTEMS'], ['Left out', '2,609 stands (40,946 ha) from 2013 on with no visible cut']],
-    sat: [['Images', 'Landsat 8/9 (2013–2020), Sentinel-2 (2018–2024)'], ['Window', '2 years before to 3 years after the record'], ['Test', 'a drop in the forest signal (NBR)'], ['Kept if', 'at least half of the stand shows loss'], ['Left out', '2,609 stands, 40,946 ha'], ['Why check only', 'images show a loss of forest but not its cause, so they confirm the logging records rather than add new ones']],
+    ari: [['From', 'Ontario MNRF'], ['Adds', 'logging after 2020'], ['Overlap', '84% of its 1980–2020 logging is also in NTEMS'], ['Excluded', '2,609 stands (40,946 ha) from 2013 on with no visible cut']],
+    sat: [['Images', 'Landsat 8/9 (2013–2020), Sentinel-2 (2018–2024)'], ['Window', '2 years before to 3 years after the record'], ['Test', 'a drop in the forest signal (NBR)'], ['Retained if', 'at least half of the stand shows loss'], ['Excluded', '2,609 stands, 40,946 ha'], ['Why check only', 'images show a loss of forest but not its cause, so they confirm the logging records rather than add new ones']],
     mnrf: [['From', 'Ontario MNRF'], ['Holds', 'road lines with the year built'], ['Counted', 'from the year built'], ['Overlap', 'holds 83% of NRN roads']],
     nrn: [['From', 'Natural Resources Canada'], ['Holds', 'national road lines, no build year'], ['Counted', 'in every year'], ['Overlap', '83% is also in MNRF roads']],
     olcc: [['From', 'Ontario MNRF'], ['Years', '2000–2011'], ['Classes used', '25 mines, 27 towns, 28 farms, 18 disturbance'], ['Class 18', 'inside a fire since 1985: wildfire; elsewhere: human']],
@@ -3351,7 +3582,7 @@ window.mmInit = function () {
     nbac: [['From', 'Canadian Forest Service, mapped from satellites'], ['Years', '1980–2025 (used from 1985)'], ['Adds', 'the 2025 fires'], ['Overlap', '96% of its 2000–2020 burns are also in NFDB']],
     ranges: [['From', 'Ontario MNRF'], ['Ranges', 'Berens, Brightsand, Churchill, Kesagami, Nipigon, Pagwachuan, Sydney']],
     fmu: [['From', 'Ontario MNRF'], ['Used for', 'the managed-forest basis of the published study']],
-    forest: [['From', 'VLCE2, 2019'], ['Kept', 'conifer forest, treed wetland']],
+    forest: [['From', 'VLCE2, 2019'], ['Classes', 'conifer forest, treed wetland']],
     log: [['Sources', 'FRI ∪ NTEMS ∪ ARI'], ['Since', '1980'], ['Buffer zone', '500 m']],
     road: [['Sources', 'MNRF ∪ NRN'], ['Year', 'MNRF roads count from the year built'], ['Buffer zone', '500 m']],
     land: [['Classes', '25, 27, 28, and 18 outside fires'], ['Buffer zone', '500 m']],
@@ -3383,7 +3614,7 @@ window.mmInit = function () {
     const lo = a => a[a.length - 1];
     return {
       pct: [[`All ranges, ${yr}`, pc(T.dist[li])], ['Most disturbed', `${d[0]}, ${pc(v(d[0], 'dist'))}`], ['Least disturbed', `${lo(d)}, ${pc(v(lo(d), 'dist'))}`],
-            ['Above the 35% limit', `${R.filter(r => v(r, 'dist') > 35).length} of ${R.length} ranges`], [`Change since ${y0}`, pts(T.dist[li] - T.dist[0])]],
+            ['Above the 35% threshold', `${R.filter(r => v(r, 'dist') > 35).length} of ${R.length} ranges`], [`Change since ${y0}`, pts(T.dist[li] - T.dist[0])]],
       core: [[`All ranges, ${yr}`, ha(T.core[li])], [`Change since ${y0}`, (T.core[li] < T.core[0] ? '−' : '+') + Math.abs(Math.round((T.core[li] - T.core[0]) / T.core[0] * 100)) + '%'],
              ['Most core', `${c[0]}, ${ha(v(c[0], 'core'))}`]],
       human: [[`All ranges, ${yr}`, pc(all('anthro', li))], ['Highest', `${h[0]}, ${pc(v(h[0], 'anthro'))}`], ['Lowest', `${lo(h)}, ${pc(v(lo(h), 'anthro'))}`],
@@ -3417,7 +3648,7 @@ window.mmInit = function () {
       kind: 'Data', title: 'Wildfire', text: 'Fire perimeters from the provinces\' national database and a satellite-mapped burned-area record that reaches 2025.',
       ds: [['NFDB fire perimeters', 'study'], ['NBAC burned area 1985–2025', 'added']] },
     sat: { x: 285, y: 148, r: 27, c: '--sat', icon: 'i-sat', name: 'Satellites', sub: 'check only', check: true,
-      kind: 'Check', title: 'Satellite images', text: 'Every ARI logging stand from 2013 on is checked on summer images. Stands with no visible cut are left out.',
+      kind: 'Check', title: 'Satellite images', text: 'Every ARI logging stand from 2013 on is checked on summer images. Stands without a visible cut are excluded.',
       ds: [['Landsat 8/9', 'check'], ['Sentinel-2', 'check']] },
     hub: { x: 705, y: 390, r: 112, c: '--accent', icon: 'i-caribou', name: 'Range map, 30 m', sub: 'every year 2015–2025', hub: true,
       kind: 'Yearly map', title: 'The range map, every year', text: 'For each of the seven ranges and each year from 2015 to 2025, every 30 m pixel is marked as habitat, disturbed or neither. Disturbance from any source counts once.',
@@ -3425,15 +3656,15 @@ window.mmInit = function () {
     rhab: { x: 420, y: 90, r: 50, c: '--forest', icon: 'i-tree', name: 'Habitat only', sub: 'conifer + treed wetland', rule: true,
       kind: 'Rule', title: 'Keep only caribou habitat', text: 'Only conifer forest and treed wetland count as habitat. Everything else is set aside before any disturbance is considered.', ds: [] },
     rsat: { x: 420, y: 215, r: 50, c: '--sat', icon: 'i-sat', name: 'Seen from space', sub: 'ARI 2013 + tested', rule: true,
-      kind: 'Rule', title: 'Only cuts seen from space', text: 'Each ARI logging stand from 2013 on is kept only if at least half of it shows a clear cut on Landsat or Sentinel-2 summer images.', ds: [['Landsat 8/9', 'check'], ['Sentinel-2', 'check']] },
+      kind: 'Rule', title: 'Only cuts seen from space', text: 'An ARI logging stand from 2013 on is retained only if at least half of it shows a clear cut on Landsat or Sentinel-2 summer images.', ds: [['Landsat 8/9', 'check'], ['Sentinel-2', 'check']] },
     rbuf: { x: 420, y: 360, r: 56, c: '--human', icon: 'i-buf', name: '500 m buffer', sub: 'around human disturbance', rule: true,
       kind: 'Rule', title: '500 m buffer zone', text: 'Logging, roads, mines, towns and farms each count with a 500 m buffer zone around them, as in Canada\'s method: caribou avoid them, and roads let predators in.', ds: [] },
     rburn: { x: 420, y: 495, r: 50, c: '--built', icon: 'i-fire', name: 'Burns = fire', sub: 'land-cover class 18', rule: true,
       kind: 'Rule', title: 'Burns count as fire', text: 'Ontario\'s land cover has a "disturbance" class that mixes cuts and burns. Where it lies inside a fire mapped from 1985 on, it counts as that fire, not as human disturbance.', ds: [['PLC2000 confirms the burns', 'check']] },
     rfire: { x: 420, y: 625, r: 50, c: '--fire', icon: 'i-fire', name: 'Fire from 1985', sub: 'no buffer zone', rule: true,
       kind: 'Rule', title: 'Fire from 1985, no buffer zone', text: 'Fires count from 1985 in every year, so no fire is counted one year and dropped the next. Burned areas get no buffer zone.', ds: [] },
-    pct: { x: 1040, y: 110, r: 52, c: '--accent', icon: 'i-pct', name: '% disturbed', sub: 'vs the 35% limit',
-      kind: 'Result', title: 'Share of each range disturbed', text: 'Compared with Canada\'s 35% limit, above which a herd is unlikely to sustain itself. Measured inside the managed forest, and over the whole range.', ds: [] },
+    pct: { x: 1040, y: 110, r: 52, c: '--accent', icon: 'i-pct', name: '% disturbed', sub: 'vs the 35% threshold',
+      kind: 'Result', title: 'Share of each range disturbed', text: 'Compared with Canada\'s 35% threshold, above which a herd is unlikely to sustain itself. Measured inside the managed forest, and over the whole range.', ds: [] },
     core: { x: 1040, y: 280, r: 52, c: '--forest', icon: 'i-core', name: 'Core habitat', sub: 'blocks of 100 ha +',
       kind: 'Result', title: 'Core habitat', text: 'Undisturbed habitat with a 30 m edge removed, joined into patches. Only patches of 100 ha or more count.', ds: [] },
     rhum: { x: 1040, y: 450, r: 52, c: '--human', icon: 'i-built', name: 'Human', sub: 'anthropogenic %',
@@ -3534,7 +3765,7 @@ window.mmInit = function () {
       fri: [X.ds, 166, 13, 'study', 'f-doc', 'FRI', 'study', 'ds', 'Ontario\'s Forest Resources Inventory: logging since 1980, planted stands and corridors.'],
       ntems: [X.ds, 202, 13, 'study', 'f-axe', 'NTEMS harvest', 'study', 'ds', 'Canada\'s Landsat harvest map, 1985–2020, with the year of each cut.'],
       ari: [X.ds, 238, 13, 'added', 'f-doc', 'ARI', 'added', 'ds', 'Ontario\'s annual logging reports: the only logging record after 2020.'],
-      sat: [X.ds - 70, 270, 12, 'check', 'f-sat', 'Satellites', 'tests ARI', 'chk', 'Landsat 8/9 and Sentinel-2 summer images. Every ARI logging stand from 2013 on is tested; stands with no visible cut are left out.'],
+      sat: [X.ds - 70, 270, 12, 'check', 'f-sat', 'Satellites', 'tests ARI', 'chk', 'Landsat 8/9 and Sentinel-2 summer images. Every ARI logging stand from 2013 on is tested; stands without a visible cut are excluded.'],
       mnrf: [X.ds, 330, 13, 'study', 'f-road', 'MNRF roads', 'study', 'ds', 'Ontario\'s road segments, with the year each road was built.'],
       nrn: [X.ds, 366, 13, 'study', 'f-road', 'NRN', 'study', 'ds', 'Canada\'s national road network.'],
       olcc: [X.ds, 458, 13, 'study', 'f-built', 'OLCC', 'study', 'ds', 'Ontario\'s land-cover compilation: mines (25), towns (27), farms (28), and a disturbance class (18) that mixes cuts and burns.'],
@@ -3543,7 +3774,7 @@ window.mmInit = function () {
       nbac: [X.ds, 602, 13, 'added', 'f-fire', 'NBAC', 'added', 'ds', 'National Burned Area Composite: satellite-mapped burns, the only fire source for 2025.'],
       ranges: [X.ds, 692, 13, 'study', 'f-pin', 'Ranges', 'study', 'ds', 'The seven Ontario caribou range boundaries.'],
       fmu: [X.ds, 728, 13, 'study', 'f-tree', 'FMU', 'study', 'ds', 'Forest management units: the managed forest.'],
-      forest: [X.kind, 72, 40, 'forest', 'f-tree', 'Forest', 'conifer + treed wetland', 'kind', 'VLCE2 classes kept as potential habitat: conifer forest and treed wetland.'],
+      forest: [X.kind, 72, 40, 'forest', 'f-tree', 'Forest', 'conifer + treed wetland', 'kind', 'VLCE2 classes used as potential habitat: conifer forest and treed wetland.'],
       log: [X.kind, 202, 40, 'logging', 'f-axe', 'Logging', 'FRI ∪ NTEMS ∪ ARI', 'kind', 'Union of FRI, NTEMS and ARI cuts since 1980 (NTEMS gives the year where both record one; ARI fills the rest and goes past 2020), plus planted stands and corridors.'],
       road: [X.kind, 348, 40, 'roads', 'f-road', 'Roads', 'MNRF (≤ year) ∪ NRN', 'kind', 'Union of MNRF roads built by each year and NRN roads.'],
       land: [X.kind, 470, 40, 'built', 'f-built', 'Land cover', 'OLCC 25 · 27 · 28 · 18', 'kind', 'Mines, towns and farms, plus OLCC\'s disturbance class 18, which is split by fire.'],
@@ -3559,7 +3790,7 @@ window.mmInit = function () {
       r2: [X.op2, 466, 25, 'op', 'div', 'Share', 'human ∩ area ÷ area', 'op', 'Area of human disturbance inside the range area, divided by the range area. Overlaps with fire count as human.'],
       r3: [X.op2, 632, 25, 'op', 'div', 'Share', '(fire − human) ÷ area', 'op', 'Area burned and not also disturbed by people, divided by the range area.'],
       core: [X.res, 72, 32, 'forest', 'f-core', 'Core habitat', 'ha, every year', 'res', 'Core habitat in patches of 100 ha or more, for each range and year.'],
-      pct: [X.res, 300, 32, 'ink', 'f-pct', '% disturbed', 'vs the 35% limit', 'res', 'Share of each range disturbed, compared with Canada\'s 35% limit.'],
+      pct: [X.res, 300, 32, 'ink', 'f-pct', '% disturbed', 'vs the 35% threshold', 'res', 'Share of each range disturbed, compared with Canada\'s 35% threshold.'],
       rh: [X.res, 466, 32, 'human', 'f-built', 'Human %', 'anthropogenic', 'res', 'Share of each range disturbed by people.'],
       rf: [X.res, 632, 32, 'fire', 'f-fire', 'Wildfire %', 'fire only', 'res', 'Share of each range burned and not also disturbed by people.'],
       eccc: [X.res + 82, 300, 12, 'check', 'f-scale', 'ECCC 2020', 'compared', 'chk', 'Environment and Climate Change Canada\'s 2020 map: compared with the result, not used in it.'],
